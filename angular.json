@@ -6,7 +6,7 @@
     "tik-talk": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": { "type": "component", "style": "scss" },
+        "@schematics/angular:component": { "type": "component", "style": "scss", "skipTests": true },
         "@schematics/angular:directive": { "type": "directive" },
         "@schematics/angular:service": { "type": "service" },
         "@schematics/angular:guard": { "typeSeparator": "." },
