@@ -12,13 +12,5 @@ import {Profile} from "./data/interfaces/profile.interface";
     styleUrl: './app.scss'
 })
 export class App {
-    profileService = inject(ProfileService);
-    profiles: Profile[] = [] //массив наших профилей, делаем тип данных Profile[], которые создали в интерфейсах и передали в сервисе(getTestAccounts) тип данных
 
-    constructor() {
-        this.profileService.getTestAccounts()
-            .subscribe(val => { //подписался на объект
-                this.profiles = val //вовзвращает некоторое значение, которому мы присваиваем переменной profiles это значение
-            })
-    }
 }
