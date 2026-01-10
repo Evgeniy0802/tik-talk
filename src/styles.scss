@@ -6,7 +6,8 @@
   --light-color: #FFFFFF;
   --primary-color: #AE7AFF;
   --gray-color: #5F646D;
-  --eye-color: #FFFFFFBF;
+  --light-transparent-color: #FFFFFFBF;
+  --dark-hover-color: #161616;
 }
 
 *,
@@ -18,6 +19,7 @@
 }
 
 body {
+  height: 100dvh;
   font-family: "JetBrains Mono", sans-serif;
   background: var(--dark-color);
   color: var(--light-color);
@@ -81,6 +83,14 @@ body {
   font-size: 14px;
   line-height: 21px;
   font-weight: 400;
+}
+
+.medium-text {
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  color: var(--light-transparent-color);
 }
 
 .tt-control-label {
