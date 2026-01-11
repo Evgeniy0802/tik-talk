@@ -26,13 +26,18 @@ export class ProfileService {
         )
   }
 
-  getSubscribersShortList() {
+  getAccount(id: string) {
+    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
+  }
+
+  getSubscribersShortList(subsAmount = 3) {
+    //принимаем параметр subsAmount = 3 по умолчанию
     //get запрос, на подписчиков, он возвращает информацию о погинации
     return this.http.get<Pageable<Profile>>(`${this.baseApiUrl}account/subscribers/`)
         //получаем res.item, вернули только items, но нам не нужно 5 штук, нам нужно 3
         //это же массив, можем сделать slice(0, 3)
         .pipe(
-            map(res => res.items.slice(0, 3))
+            map(res => res.items.slice(0, subsAmount))
         )
   }
 
