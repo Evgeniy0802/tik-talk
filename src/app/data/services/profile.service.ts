@@ -41,7 +41,11 @@ export class ProfileService {
         )
   }
 
-
+  patchProfile(profile: Partial<Profile>) {
+    //Partial обозночает что необязательно могу придти все поля этого объекта
+    return this.http.patch<Profile>(`${this.baseApiUrl}account/me`, profile)
+    //как payload примит profile
+  }
 
 }
 
