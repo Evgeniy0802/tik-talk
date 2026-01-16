@@ -27,7 +27,9 @@
   width: 100%;
   text-align: left;
   border-radius: 2px;
+  text-decoration: none;
 
+  &.active,
   &:hover,
   &:focus-visible {
     background: var(--dark-hover-color);
@@ -71,6 +73,11 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
+
+    &:hover,
+    &:focus-visible {
+      border: 1px solid var(--light-color);
+    }
   }
 }
 
@@ -84,10 +91,10 @@
     width: 13px;
     height: 13px;
     color: var(--primary-color);
-  }
 
-  &:hover,
-  &:focus-visible {
-    color: var(--light-color);
+    &:hover,
+    &:focus-visible {
+      color: var(--light-color);
+    }
   }
 }

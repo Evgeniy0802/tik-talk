@@ -22,6 +22,11 @@
   height: 70px;
   border-radius: 50%;
   overflow: hidden;
+
+  &:hover,
+  &:focus-visible {
+    border: 2px solid var(--light-color);
+  }
 }
 
 .profile-card__name {
@@ -35,4 +40,16 @@
   flex-wrap: wrap;
   gap: 4px;
   height: min-content;
+}
+
+.btn-sub {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--light-color);
+  }
 }

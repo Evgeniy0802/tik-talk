@@ -1,0 +1,77 @@
+:host {
+  display: grid;
+  grid-gap: 48px;
+  grid-template-columns: 322px 1fr;
+  padding: 24px;
+}
+
+.profile-form__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--light-color);
+  background: var(--dark-color);
+  height: calc(100dvh - (24px * 4));
+  padding: 32px;
+}
+
+.profile-form {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.three-btn-settings {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.two-btn {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-settings {
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 1px solid var(--light-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--primary-color);
+  }
+}
+
+.two-icon-settings {
+  width: 12px;
+  height: 12px;
+}
+
+.btn-save {
+  width: 227px;
+  height: 44px;
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+  border: 1px solid var(--dark-color);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--light-color);
+  }
+}
