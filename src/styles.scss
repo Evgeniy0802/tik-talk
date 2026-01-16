@@ -68,6 +68,12 @@ body {
   }
 }
 
+.btn-text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+}
+
 .h1 {
   font-size: 48px;
   line-height: 56px;
@@ -99,6 +105,13 @@ body {
   line-height: 16px;
   font-weight: 500;
   color: var(--light-transparent-color);
+}
+
+.medium-text-option {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--light-color);
 }
 
 .regular {
@@ -157,6 +170,7 @@ body {
 
   &:focus-visible {
     outline: 1px solid var(--primary-color);
+    border-radius: 4px;
   }
 }
 

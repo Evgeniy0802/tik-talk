@@ -1,9 +1,10 @@
 import {HttpHandlerFn, HttpInterceptorFn, HttpRequest} from "@angular/common/http";
 import {AuthService}                                   from "./auth.service";
-import {inject}                            from "@angular/core";
-import {catchError, switchMap, throwError} from "rxjs";
+import {inject}                                                          from "@angular/core";
+import {BehaviorSubject, catchError, filter, switchMap, tap, throwError} from "rxjs";
 
-let isRefreshing = false //щёлочка
+let isRefreshing$ = new BehaviorSubject<boolean>(false)
+//некий гибрид между стримом и сигналом мы можем подписаться на него и без подписки в любой момент времени получить значение
 
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
     //next функция что-бы отпустить его, а req это перехваченный реквест
@@ -12,7 +13,8 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
 
     if (!token) return next(req)
 
-    if (isRefreshing) {
+    if (isRefreshing$.value) {
+        //если хотим поменять значение то будет метод next()
         return refreshAndProceed(authService, req, next) //если происходит рефрешинг, тогда мы сразу отпраялем запрос на рефреш
     }
 
@@ -30,19 +32,34 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
 }
 
 const refreshAndProceed = (authService: AuthService, req: HttpRequest<any>, next: HttpHandlerFn) => {
-    if (!isRefreshing) {
-        isRefreshing = true
+    if (!isRefreshing$.value) {
+        isRefreshing$.next( true)
 
         return authService.refreshAuthToken()
             .pipe( //рефреш токен это стрим, нам нужно перейти в другой стрим, тот запрос с которого мы начали, с полученными данными мы должны отправить запрос еще туда
                 switchMap((res) => { //берёт стрим который ты ему дал и меняет на другой стрим
-                    isRefreshing = false
                     return next(addToken(req, res.access_token))//меняет его на этот стрим
+                        .pipe(
+                            tap(() => {
+                                isRefreshing$.next(false)
+                            })
+                        )
                 })
             )
     }
 
-    return next(addToken(req, authService.token!)) //другая ветка развитий событий если кто-то залётный оказался
+    if (req.url.includes('refresh')) return next(addToken(req, authService.token!))
+
+    //return next(addToken(req, authService.token!)) //другая ветка развитий событий если кто-то залётный оказался
+
+    return isRefreshing$.pipe(
+        filter(isRefreshing => !isRefreshing),
+        //мы подписаны на isRefreshing но мы игнорируем все не false значения
+        switchMap(res => {
+            return next(addToken(req, authService.token!))
+        })
+    )
+    //если не ререшиться, то начинаем рефрешить, а если рефрешиться то пусть ждёт когда закончится рефреш
 
     //рефреш токен прошел, ответ на запрос в res
     //switchMap используя старый ответ на запрос, может поменять себя в другой стрим

@@ -26,14 +26,27 @@
         </label>
 
         <label class="tt-form-label">
+            <span class="tt-form-label__text">Аватар</span>
+            <app-avatar-upload></app-avatar-upload>
+        </label>
+
+        <label class="tt-form-label">
             <span class="tt-form-label__text">Навыки (стэк)</span>
             <input type="text" class="tt-form-input" formControlName="stack">
         </label>
     </div>
 
-    <div>
-        <div>
-            <button class="btn" (click)="onSave()">Сохранить</button>
-        </div>
+    <div class="three-btn-settings">
+            <div class="two-btn">
+                <button class="btn-settings" (click)="clearForm()">
+                    <svg icon="delete" class="two-icon-settings"></svg>
+                </button>
+                <button class="btn-settings" [routerLink]="['/login']">
+                    <svg icon="logout" class="two-icon-settings"></svg>
+                </button>
+            </div>
+            <div>
+                <button class="btn-save" (click)="onSave()">Сохранить</button>
+            </div>
     </div>
 </form>

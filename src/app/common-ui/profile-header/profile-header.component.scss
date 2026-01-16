@@ -8,6 +8,11 @@ img {
   width: 112px;
   height: 112px;
   border-radius: 50%;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--light-color);
+  }
 }
 
 username-and-name {
