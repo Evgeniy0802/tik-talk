@@ -1,0 +1,21 @@
+img {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--light-color);
+  }
+}
+
+
+:host.size32 img {
+  width: 32px;
+  height: 32px;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--light-color);
+  }
+}
