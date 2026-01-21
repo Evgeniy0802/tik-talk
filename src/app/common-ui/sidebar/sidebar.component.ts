@@ -1,5 +1,5 @@
-import {Component, inject}            from '@angular/core';
-import {SvgIconComponent}             from "../svg-icon/svg-icon.component";
+import {Component, HostBinding, inject} from '@angular/core';
+import {SvgIconComponent}               from "../svg-icon/svg-icon.component";
 import {AsyncPipe, JsonPipe, NgForOf} from "@angular/common";
 import {SubscriberCardComponent}      from "./subscriber-card/subscriber-card.component";
 import {RouterLink, RouterLinkActive} from "@angular/router";
@@ -59,4 +59,10 @@ export class SidebarComponent {
         firstValueFrom(this.profileService.getMe())
     }
 
+    @HostBinding('class.filelogout')
+    filelogout = false
+
+    showLogout() {
+        this.filelogout = true;
+    }
 }

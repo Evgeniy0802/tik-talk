@@ -8,6 +8,7 @@
 }
 
 .post-body {
+  position: relative;
   display: grid;
   grid-gap: 12px;
 }
@@ -44,4 +45,29 @@
   overflow-y: scroll;
   display: grid;
   grid-gap: 8px;
+}
+
+.pots__comments-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.pots__comments-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+.points-svg {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  color: var(--light-color);
+  right: 14px;
+  top: 14px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--primary-color);
+  }
 }
