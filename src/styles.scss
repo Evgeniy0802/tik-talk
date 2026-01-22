@@ -19,8 +19,14 @@
   padding: 0;
 }
 
+.workspace::-webkit-scrollbar {
+  display: none; /* Полностью скрывает визуальное отображение скроллбара */
+  width: 0; /* Или установите ширину в 0, чтобы гарантировать его отсутствие */
+}
+
 body {
   height: 100dvh;
+  overflow: hidden;
   font-family: "JetBrains Mono", sans-serif;
   background: var(--dark-color);
   color: var(--light-color);

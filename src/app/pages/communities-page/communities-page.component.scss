@@ -49,6 +49,19 @@
   display: grid;
   grid-gap: 20px;
   padding: 20px 16px;
+  overflow-y: scroll;
+  height: 725px;
+}
+
+.communities__wrapper::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: var(--dark-color);
+}
+
+.communities__wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
 }
 
 .communities-card {

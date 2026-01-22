@@ -100,8 +100,55 @@
   }
 }
 
-.filelogout {
-  width: 30px;
-  height: 30px;
-  background: tomato;
+.exit {
+  position: absolute;
+  padding: 20px;
+  bottom: 70px;
+  width: min-content;
+  height: 40px;
+  background: none;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.svg-ex {
+  width: 12px;
+  height: 12px;
+}
+
+.ex-txt {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.svg-close {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  color: var(--primary-color);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--light-color);
+  }
+}
+
+.btn-ex {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--dark-hover-color);
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--dark-color);
+  color: var(--primary-color);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--light-color);
+  }
 }

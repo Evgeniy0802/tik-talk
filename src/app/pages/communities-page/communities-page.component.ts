@@ -22,12 +22,9 @@ import {fromEvent}                                              from "rxjs";
 })
 export class CommunitiesPageComponent {
     profileService = inject(ProfileService);
-   
 
-    @HostListener('window:resize')
-    onWindowResize() {
-        this.resizeFeedComm()
-    }
+
+
 
     subscribersIvan$ = this.profileService.getSubscribersShortList(5);
     subscribersApl$ = this.profileService.getSubscribersShortList(4);

@@ -1,9 +1,15 @@
 :host {
   display: grid;
   grid-gap: 16px;
+}
+
+.feed-container {
+  display: grid;
+  grid-gap: 16px;
+  height: 100%;
   overflow-y: scroll;
 }
 
-:host::-webkit-scrollbar {
+.feed-container::-webkit-scrollbar {
   display: none;
 }

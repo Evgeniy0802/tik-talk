@@ -3,7 +3,22 @@
   grid-gap: 20px;
 }
 
+
 .profile-card_wrapper {
   display: grid;
   grid-gap: 8px;
+  overflow-y: scroll;
+  height: 725px;
 }
+
+.profile-card_wrapper::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: var(--dark-color);
+}
+
+.profile-card_wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
