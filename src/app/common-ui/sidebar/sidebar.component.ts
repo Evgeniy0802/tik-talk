@@ -31,6 +31,7 @@ export class SidebarComponent {
 
     // Переменная для управления видимостью кнопки "Выход"
     fileLogout: boolean = false
+    photoSide: boolean = false
 
     subscribers$ = this.profileService.getSubscribersShortList()
     //если стрим значит нужен знак $
@@ -67,6 +68,10 @@ export class SidebarComponent {
     // Метод, который будет вызываться директивой для обновления состояния
     onSowStatus(value: boolean) {
         this.fileLogout = value
+    }
+
+    onShowLogoTik(value: boolean) {
+        this.photoSide = value
     }
     
 

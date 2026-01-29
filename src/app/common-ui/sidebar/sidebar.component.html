@@ -1,9 +1,25 @@
 
-  <img
-        src="/assets/svg/logo-small.svg"
-        alt=""
-        class="ml16 mb20"
-  >
+<div
+        class="img-svg-container ml16 mb20"
+        (clickApp)="onShowLogoTik($event)"
+        clickDnd
+>
+  @if (photoSide) {
+        <img
+                src="/assets/imgs/grealish.png"
+                alt=""
+                class="img-side"
+        >
+  } @else {
+        <img
+                src="/assets/svg/logo-small.svg"
+                alt=""
+        >
+  }
+</div>
+
+
+
 
 
 <nav>

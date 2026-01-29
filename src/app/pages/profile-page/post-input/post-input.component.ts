@@ -46,32 +46,15 @@ export class PostInputComponent {
     this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px');
   }
 
-  //создание поста
-  onCreatePost() {
-    if (!this.postText) return
 
-    if (this.isCommentInput()) {
-      firstValueFrom(this.postService.createComment({
-        text: this.postText,
-        authorId: this.profile()!.id,
-        postId: this.postId()
-      })).then(() => {
-        this.postText = ''
-        //когда коммент создался вызываем
-        this.created.emit()
-      })
-      return
+  onSend() { //слушает что создал пост и реализует его
+    if (this.postText.trim()) { //проверяет, есть ли в поле ввода хоть какой-то полезный контент, помимо одних только пробелов.
+      this.created.emit(this.postText) //эмитит пост текст
+      this.postText = ''
     }
+  }
 
-    firstValueFrom(this.postService.createPost({
-      title: 'Клёвый пост',
-      content: this.postText,
-      authorId: this.profile()!.id
-    }))
-        //это простой промис так что можем сделать что то с результатом
-        .then(() => {
-          //после того как все произошло будем делать что пост равен пустой строке
-          this.postText = ''
-    })
+  onKeyUp() {
+    this.onSend()
   }
 }

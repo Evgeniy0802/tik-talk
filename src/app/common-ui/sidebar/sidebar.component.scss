@@ -5,6 +5,22 @@
   background: var(--dark-color);
 }
 
+.img-svg-container {
+  width: 61px;
+  height: 74px;
+}
+
+.img-side {
+  width: 61px;
+  height: 74px;
+  border-radius: 50%;
+
+  &:hover,
+  &:focus-visible {
+    border: 2px solid var(--light-color);
+  }
+}
+
 .main-menu-list {
   display: grid;
   grid-gap: 8px;
