@@ -37,25 +37,14 @@
   gap: 20px;
 }
 
-.btn-settings {
-  width: 44px;
-  height: 44px;
+.btn-icon {
   background: none;
   border: 1px solid var(--light-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
 
   &:hover,
   &:focus-visible {
     border: 1px solid var(--primary-color);
   }
-}
-
-.two-icon-settings {
-  width: 12px;
-  height: 12px;
 }
 
 .btn-save {
@@ -74,4 +63,8 @@
   &:focus-visible {
     border: 1px solid var(--light-color);
   }
+}
+
+.white {
+  color: var(--light-color);
 }

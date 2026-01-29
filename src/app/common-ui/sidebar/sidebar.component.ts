@@ -1,5 +1,5 @@
-import {Component, inject}            from '@angular/core';
-import {SvgIconComponent}             from "../svg-icon/svg-icon.component";
+import {Component, HostBinding, HostListener, inject} from '@angular/core';
+import {SvgIconComponent}                             from "../svg-icon/svg-icon.component";
 import {AsyncPipe, JsonPipe, NgForOf} from "@angular/common";
 import {SubscriberCardComponent}      from "./subscriber-card/subscriber-card.component";
 import {RouterLink, RouterLinkActive} from "@angular/router";
@@ -8,6 +8,7 @@ import {firstValueFrom, Observable}   from "rxjs";
 import {Pageable}                     from "../../data/interfaces/pageable.interface";
 import {Profile}                      from "../../data/interfaces/profile.interface";
 import {ImgUrlPipe}                   from "../../helpers/pipes/img-url.pipe";
+import {ClickDirective}                               from "../directives/click.directive";
 
 @Component({
     selector: 'app-sidebar',
@@ -16,9 +17,9 @@ import {ImgUrlPipe}                   from "../../helpers/pipes/img-url.pipe";
         SubscriberCardComponent,
         RouterLink,
         AsyncPipe,
-        JsonPipe,
         ImgUrlPipe,
-        RouterLinkActive
+        RouterLinkActive,
+        ClickDirective
     ],
     templateUrl: './sidebar.component.html',
     styleUrl: './sidebar.component.scss',
@@ -27,6 +28,10 @@ export class SidebarComponent {
     profileService = inject(ProfileService)
 
     me = this.profileService.me
+
+    // Переменная для управления видимостью кнопки "Выход"
+    fileLogout: boolean = false
+    photoSide: boolean = false
 
     subscribers$ = this.profileService.getSubscribersShortList()
     //если стрим значит нужен знак $
@@ -58,5 +63,16 @@ export class SidebarComponent {
     ngOnInit() {
         firstValueFrom(this.profileService.getMe())
     }
+
+
+    // Метод, который будет вызываться директивой для обновления состояния
+    onSowStatus(value: boolean) {
+        this.fileLogout = value
+    }
+
+    onShowLogoTik(value: boolean) {
+        this.photoSide = value
+    }
+    
 
 }

@@ -1,5 +1,10 @@
-<app-profile-header
-></app-profile-header>
+<div>
+ @if (profile$ | async; as profile) {
+        <app-profile-header
+                [profile]="profile"
+        ></app-profile-header>
+ }
+</div>
 
 <form class="profile-form__wrapper" [formGroup]="form">
     <div class="profile-form">
@@ -38,11 +43,11 @@
 
     <div class="three-btn-settings">
             <div class="two-btn">
-                <button class="btn-settings" (click)="clearForm()">
-                    <svg icon="delete" class="two-icon-settings"></svg>
+                <button class="btn-icon" (click)="clearForm()">
+                    <svg icon="delete" class="svg12"></svg>
                 </button>
-                <button class="btn-settings" [routerLink]="['/login']">
-                    <svg icon="logout" class="two-icon-settings"></svg>
+                <button class="btn-icon" [routerLink]="['/login']">
+                    <svg icon="logout" class="svg12 white"></svg>
                 </button>
             </div>
             <div>

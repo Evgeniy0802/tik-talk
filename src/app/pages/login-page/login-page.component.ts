@@ -3,12 +3,14 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {AuthService}                       from "../../auth/auth.service";
 import {delay, from, map, skip, take, tap} from "rxjs";
 import {Router}                                                  from "@angular/router";
+import {SvgIconComponent} from "../../common-ui/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-login-page',
-  imports: [
-    ReactiveFormsModule
-  ],
+    imports: [
+        ReactiveFormsModule,
+        SvgIconComponent
+    ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })

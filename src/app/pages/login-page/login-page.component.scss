@@ -34,6 +34,12 @@
   color: var(--primary-color);
 }
 
+.eye-svg {
+  width: 20px;
+  height: 20px;
+  color: var(--light-transparent-color);
+}
+
 .telegram-input {
   position: relative;
 }
@@ -46,5 +52,16 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.tg-svg {
+  width: 20px;
+  height: 20px;
+  color: var(--light-color);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--primary-color);
+  }
 }
 

@@ -1,8 +1,26 @@
-<img
-        src="/assets/svg/logo-small.svg"
-        alt=""
-        class="ml16 mb20"
+
+<div
+        class="img-svg-container ml16 mb20"
+        (clickApp)="onShowLogoTik($event)"
+        clickDnd
 >
+  @if (photoSide) {
+        <img
+                src="/assets/imgs/grealish.png"
+                alt=""
+                class="img-side"
+        >
+  } @else {
+        <img
+                src="/assets/svg/logo-small.svg"
+                alt=""
+        >
+  }
+</div>
+
+
+
+
 
 <nav>
     <ul class="main-menu-list">
@@ -44,16 +62,35 @@
 
 <footer class="sidebar__footer">
 @if (me(); as me) {
-    @if (me.avatarUrl) {
-        <img [src]="me.avatarUrl | imgUrl" alt="">
-    } @else {
-        <img src="/assets/imgs/avatar-placeholder.png" alt="">
-    }
+       @if (me.avatarUrl) {
+             <img
+                     clickDnd
+                     (clickApp)="onSowStatus($event)"
+                     [src]="me.avatarUrl | imgUrl"
+                     alt="">
+       } @else {
+             <img src="/assets/imgs/avatar-placeholder.png" alt="">
+       }
+
+
 
     <div class="medium-text username-text">{{ me.username }}</div>
 
     <a [routerLink]="['settings']" class="settings-btn">
         <svg icon="settings"></svg>
     </a>
-}    
+}
+
 </footer>
+
+@if (fileLogout) {
+    <div class="exit-account">
+        <div class="exit">
+            <button class="btn-ex" [routerLink]="['/login']">
+                  <svg icon="logout" class="svg-ex"></svg>
+                  <span class="ex-txt">Выход</span>
+            </button>
+        </div>
+    </div>
+}
+

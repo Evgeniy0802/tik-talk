@@ -1,11 +1,13 @@
 import {Component, effect, inject, ViewChild} from '@angular/core';
 import {ProfileHeaderComponent}               from "../../common-ui/profile-header/profile-header.component";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {ProfileService} from "../../data/services/profile.service";
-import {firstValueFrom} from "rxjs";
-import {AvatarUploadComponent} from "./avatar-upload/avatar-upload.component";
-import {SvgIconComponent} from "../../common-ui/svg-icon/svg-icon.component";
-import {RouterLink} from "@angular/router";
+import {ProfileService}            from "../../data/services/profile.service";
+import {firstValueFrom, switchMap} from "rxjs";
+import {AvatarUploadComponent}     from "./avatar-upload/avatar-upload.component";
+import {SvgIconComponent}           from "../../common-ui/svg-icon/svg-icon.component";
+import {ActivatedRoute, RouterLink} from "@angular/router";
+import {AsyncPipe}                  from "@angular/common";
+import {toObservable} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-settings-page',
@@ -14,7 +16,8 @@ import {RouterLink} from "@angular/router";
     ReactiveFormsModule,
     AvatarUploadComponent,
     SvgIconComponent,
-    RouterLink
+    RouterLink,
+    AsyncPipe
   ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
@@ -23,12 +26,16 @@ export class SettingsPageComponent {
   fb = inject(FormBuilder)
   //дай нам formBuilder
   profileService = inject(ProfileService)
+  route = inject(ActivatedRoute)
 
   @ViewChild(AvatarUploadComponent) avatarUploader!: any
   //можем в аргументы поместить либо текст "pew" и в html можем сделать шаблонную ссылку и он собственно, на какую переменную мы его повесим, та переменная и запишет #pew, если children,то он запишет все pew которые будут
   //можем передать не только строку, но и название класса
   //тогда он возьмёт его никак html элемент, а как angular компонент
   //потомок вьюхи
+
+  profile$ = toObservable(this.profileService.me)
+
 
   form = this.fb.group({
     firstName: ['', Validators.required],
