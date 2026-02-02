@@ -6,6 +6,8 @@ import {LayoutComponent}      from "./common-ui/layout/layout.component";
 import {canActivateAuth}      from "./auth/access.guard";
 import {SettingsPageComponent} from "./pages/settings-page/settings-page.component";
 import {CommunitiesPageComponent} from "./pages/communities-page/communities-page.component";
+import {ChatsPageComponent} from "./pages/chats-page/chats-page.component";
+import {chatsRoutes} from "./pages/chats-page/chatsRoutes";
 
 export const routes: Routes = [
     {
@@ -14,7 +16,12 @@ export const routes: Routes = [
             {path: 'search', component: SearchPageComponent},
             {path: 'profile/:id', component: ProfilePageComponent},
             {path: 'settings', component: SettingsPageComponent},
-            {path: 'communities', component: CommunitiesPageComponent}
+            {path: 'communities', component: CommunitiesPageComponent},
+            {
+                path: 'chats',
+                loadChildren: () => chatsRoutes //функция которая должна вернуть chatsRoutes
+            }
+            //делаем чтобы открытый чат был в url прописан
         ],
         canActivate: [canActivateAuth]
     },

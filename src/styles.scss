@@ -9,6 +9,9 @@
   --light-transparent-color: #FFFFFFBF;
   --dark-hover-color: #161616;
   --light-transparent-form-color: rgba(255, 255, 255, 0.75);
+  --message-color: #404040;
+
+  --light-border: 1px solid var(--light-color);
 }
 
 *,
@@ -116,12 +119,6 @@ body {
     height: 100%;
     border-radius: 4px;
   }
-}
-
-.btn-text {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 24px;
 }
 
 .h1 {
