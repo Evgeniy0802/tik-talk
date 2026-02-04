@@ -1,40 +1,36 @@
 @if (post(); as post) {
-    <app-avatar-circle
-            class="size32"
-            [avatarUrl]="post.author.avatarUrl"
-    ></app-avatar-circle>
+	<app-avatar-circle
+		class="size32"
+		[avatarUrl]="post.author.avatarUrl"></app-avatar-circle>
 
-    <main class="post-body">
-        <div class="post-header">
-            <strong class="post__author">
-                {{ post.author.firstName }} {{ post.author.lastName }}
-                <span class="post-created-at">{{ post.createdAt | dateTime }}</span>
-            </strong>
-        </div>
+	<main class="post-body">
+		<div class="post-header">
+			<strong class="post__author">
+				{{ post.author.firstName }} {{ post.author.lastName }}
+				<span class="post-created-at">{{ post.createdAt | dateTime }}</span>
+			</strong>
+		</div>
 
-        <p class="medium-text-option">{{ post.content }}</p>
+		<p class="medium-text-option">{{ post.content }}</p>
 
-        <div class="post-counters">
-            <span class="comments-amount">
-                <svg icon="comments" class="svg16"></svg>
-                <span class="comments-length">{{ comments().length }}</span>
-            </span>
-        </div>
+		<div class="post-counters">
+			<span class="comments-amount">
+				<svg icon="comments" class="svg16"></svg>
+				<span class="comments-length">{{ comments().length }}</span>
+			</span>
+		</div>
 
-        <svg icon="points-posts" class="points-svg"></svg>
+		<svg icon="points-posts" class="points-svg"></svg>
 
-        <div class="pots__comments-wrapper">
-            @for (comment of comments(); track comment.id) {
-              <app-comment
-                      [comment]="comment"
-              ></app-comment>
-            }
-        </div>
+		<div class="pots__comments-wrapper">
+			@for (comment of comments(); track comment.id) {
+				<app-comment [comment]="comment"></app-comment>
+			}
+		</div>
 
-        <app-post-input
-                (created)="onCreated($event)"
-                [postId]="post.id"
-                [isCommentInput]="true"
-        ></app-post-input>
-    </main>
+		<app-post-input
+			(created)="onCreated($event)"
+			[postId]="post.id"
+			[isCommentInput]="true"></app-post-input>
+	</main>
 }

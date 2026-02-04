@@ -1,0 +1,18 @@
+@if (profile(); as profile) {
+	<div class="back-arr">
+		<svg icon="arrow" class="svg9"></svg>
+	</div>
+	<div class="companion-wrapper">
+		<app-avatar-circle
+			[avatarUrl]="profile.avatarUrl"
+			class="size32"></app-avatar-circle>
+
+		<div class="subtitle-chats">
+			{{ profile.firstName }} {{ profile.lastName }}
+		</div>
+	</div>
+
+	<div class="back-arr">
+		<svg icon="points-posts" class="svg16"></svg>
+	</div>
+}

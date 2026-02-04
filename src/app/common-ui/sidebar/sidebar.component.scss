@@ -1,170 +1,170 @@
 :host {
-  display: block;
-  padding: 20px 12px;
-  position: relative;
-  background: var(--dark-color);
+	display: block;
+	padding: 20px 12px;
+	position: relative;
+	background: var(--dark-color);
 }
 
 .img-svg-container {
-  width: 61px;
-  height: 74px;
+	width: 61px;
+	height: 74px;
 }
 
 .img-side {
-  width: 61px;
-  height: 74px;
-  border-radius: 50%;
+	width: 61px;
+	height: 74px;
+	border-radius: 50%;
 
-  &:hover,
-  &:focus-visible {
-    border: 2px solid var(--light-color);
-  }
+	&:hover,
+	&:focus-visible {
+		border: 2px solid var(--light-color);
+	}
 }
 
 .main-menu-list {
-  display: grid;
-  grid-gap: 8px;
-  list-style: none;
+	display: grid;
+	grid-gap: 8px;
+	list-style: none;
 }
 
 .menu-item {
-  padding: 16px 12px;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: var(--light-color);
-  display: grid;
-  grid-template-columns: 16px 1fr max-content;
-  grid-gap: 12px;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 24px;
-  align-items: center;
-  width: 100%;
-  text-align: left;
-  border-radius: 2px;
-  text-decoration: none;
+	padding: 16px 12px;
+	cursor: pointer;
+	border: none;
+	background: none;
+	color: var(--light-color);
+	display: grid;
+	grid-template-columns: 16px 1fr max-content;
+	grid-gap: 12px;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 24px;
+	align-items: center;
+	width: 100%;
+	text-align: left;
+	border-radius: 2px;
+	text-decoration: none;
 
-  &.active,
-  &:hover,
-  &:focus-visible {
-    background: var(--dark-hover-color);
-    color: var(--primary-color);
+	&.active,
+	&:hover,
+	&:focus-visible {
+		background: var(--dark-hover-color);
+		color: var(--primary-color);
 
-    menu-item svg {
-      color: var(--primary-color);
-    }
-  }
+		menu-item svg {
+			color: var(--primary-color);
+		}
+	}
 }
 
 .menu-item svg {
-  width: 16px;
-  height: 16px;
+	width: 16px;
+	height: 16px;
 }
 
 .to-subscribers {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }
 
 .to-subscribers-link {
-  color: var(--primary-color);
-  text-decoration: none;
+	color: var(--primary-color);
+	text-decoration: none;
 }
 
 .sidebar__footer {
-  position: absolute;
-  width: calc(100% - 20px);
-  bottom: 20px;
-  background: var(--dark-hover-color);
-  border-radius: 2px;
-  padding: 4px 16px;
-  display: grid;
-  grid-template-columns: 32px 1fr 16px;
-  grid-gap: 12px;
-  align-items: center;
+	position: absolute;
+	width: calc(100% - 20px);
+	bottom: 20px;
+	background: var(--dark-hover-color);
+	border-radius: 2px;
+	padding: 4px 16px;
+	display: grid;
+	grid-template-columns: 32px 1fr 16px;
+	grid-gap: 12px;
+	align-items: center;
 
-  img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
+	img {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		cursor: pointer;
 
-    &:hover,
-    &:focus-visible {
-      border: 1px solid var(--light-color);
-    }
-  }
+		&:hover,
+		&:focus-visible {
+			border: 1px solid var(--light-color);
+		}
+	}
 }
 
 .username-text {
-  font-weight: 700;
-  color: var(--primary-color);
+	font-weight: 700;
+	color: var(--primary-color);
 }
 
 .settings-btn {
-  svg {
-    width: 13px;
-    height: 13px;
-    color: var(--primary-color);
+	svg {
+		width: 13px;
+		height: 13px;
+		color: var(--primary-color);
 
-    &:hover,
-    &:focus-visible {
-      color: var(--light-color);
-    }
-  }
+		&:hover,
+		&:focus-visible {
+			color: var(--light-color);
+		}
+	}
 }
 
 .exit {
-  position: absolute;
-  padding: 20px;
-  bottom: 70px;
-  width: min-content;
-  height: 40px;
-  background: none;
-  border-radius: 2px;
-  display: flex;
-  align-items: center;
-  gap: 10px
+	position: absolute;
+	padding: 20px;
+	bottom: 70px;
+	width: min-content;
+	height: 40px;
+	background: none;
+	border-radius: 2px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .svg-ex {
-  width: 12px;
-  height: 12px;
+	width: 12px;
+	height: 12px;
 }
 
 .ex-txt {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 24px;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 24px;
 }
 
 .svg-close {
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-  color: var(--primary-color);
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	color: var(--primary-color);
 
-  &:hover,
-  &:focus-visible {
-    color: var(--light-color);
-  }
+	&:hover,
+	&:focus-visible {
+		color: var(--light-color);
+	}
 }
 
 .btn-ex {
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--dark-hover-color);
-  border-radius: 4px;
-  cursor: pointer;
-  border: 1px solid var(--dark-color);
-  color: var(--primary-color);
+	padding: 2px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background: var(--dark-hover-color);
+	border-radius: 4px;
+	cursor: pointer;
+	border: 1px solid var(--dark-color);
+	color: var(--primary-color);
 
-  &:hover,
-  &:focus-visible {
-    color: var(--light-color);
-  }
+	&:hover,
+	&:focus-visible {
+		color: var(--light-color);
+	}
 }
