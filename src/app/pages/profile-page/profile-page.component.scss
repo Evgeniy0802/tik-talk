@@ -1,96 +1,96 @@
 .profile-page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 24px;
 }
 
 .to-settings-btn {
-  width: 190px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+	width: 190px;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 12px;
 
-  &:hover,
-  &:focus-visible {
-    border: 1px solid var(--light-color);
-  }
+	&:hover,
+	&:focus-visible {
+		border: 1px solid var(--light-color);
+	}
 }
 
 .btn {
-  font-family: "JetBrains Mono", sans-serif;
+	font-family: 'JetBrains Mono', sans-serif;
 }
 
 .to-settings-icon {
-  width: 16px;
-  height: 16px;
-  color: var(--dark-color);
+	width: 16px;
+	height: 16px;
+	color: var(--dark-color);
 }
 
 .profile-page__body {
-  padding: 24px;
-  display: grid;
-  grid-gap: 64px;
-  grid-template-columns: 1fr 350px;
+	padding: 24px;
+	display: grid;
+	grid-gap: 64px;
+	grid-template-columns: 1fr 350px;
 }
 
 .subscribers-wrapper {
-  display: flex;
-  gap: 6px;
-  align-items: center;
+	display: flex;
+	gap: 6px;
+	align-items: center;
 }
 
 .subscriber-avatar-btn {
-  width: 36px;
-  height: 36px;
+	width: 36px;
+	height: 36px;
 
-  img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+	img {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
 
-    &:hover,
-    &:focus-visible {
-      border: 2px solid var(--light-color);
-    }
-  }
+		&:hover,
+		&:focus-visible {
+			border: 2px solid var(--light-color);
+		}
+	}
 }
 
 .to-subscribers-search {
-  position: relative;
-  border-radius: 50%;
-  background-color: var(--light-color);
-  width: 14px;
-  height: 14px;
+	position: relative;
+	border-radius: 50%;
+	background-color: var(--light-color);
+	width: 14px;
+	height: 14px;
 
-  &:hover,
-  &:focus-visible {
-    border: 1px solid var(--dark-color);
-  }
+	&:hover,
+	&:focus-visible {
+		border: 1px solid var(--dark-color);
+	}
 
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    width: 1px;
-    height: 8px;
-    background-color: var(--dark-color);
-    top: 50%;
-    left: 50%;
-  }
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		width: 1px;
+		height: 8px;
+		background-color: var(--dark-color);
+		top: 50%;
+		left: 50%;
+	}
 
-  &:before {
-    transform: translateY(-50%) translateX(-50%);
-  }
+	&:before {
+		transform: translateY(-50%) translateX(-50%);
+	}
 
-  &:after {
-    transform: translateY(-50%) translateX(-50%) rotate(90deg);
-  }
+	&:after {
+		transform: translateY(-50%) translateX(-50%) rotate(90deg);
+	}
 }
 
 .stack-wrapper {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
+	display: flex;
+	gap: 4px;
+	flex-wrap: wrap;
 }

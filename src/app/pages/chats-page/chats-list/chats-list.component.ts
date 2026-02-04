@@ -1,45 +1,51 @@
-import {Component, inject} from '@angular/core';
-import {ChatsBtnComponent}                from "../chats-btn/chats-btn.component";
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
-import {ChatsService}                     from "../../../data/services/chats.service";
-import {AsyncPipe}                    from "@angular/common";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {map, startWith, switchMap} from "rxjs";
-import {SvgIconComponent} from "../../../common-ui/svg-icon/svg-icon.component";
+import { Component, inject } from '@angular/core'
+import { ChatsBtnComponent } from '../chats-btn/chats-btn.component'
+import { FormControl, ReactiveFormsModule } from '@angular/forms'
+import { ChatsService } from '../../../data/services/chats.service'
+import { AsyncPipe } from '@angular/common'
+import { RouterLink, RouterLinkActive } from '@angular/router'
+import { map, startWith, switchMap } from 'rxjs'
+import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component'
 
 @Component({
-  selector: 'app-chats-list',
-    imports: [
-        ChatsBtnComponent,
-        ReactiveFormsModule,
-        AsyncPipe,
-        RouterLink,
-        RouterLinkActive,
-        SvgIconComponent
-    ],
-  templateUrl: './chats-list.component.html',
-  styleUrl: './chats-list.component.scss',
+	selector: 'app-chats-list',
+	imports: [
+		ChatsBtnComponent,
+		ReactiveFormsModule,
+		AsyncPipe,
+		RouterLink,
+		RouterLinkActive,
+		SvgIconComponent
+	],
+	templateUrl: './chats-list.component.html',
+	styleUrl: './chats-list.component.scss'
 })
 export class ChatsListComponent {
-  chatsService = inject(ChatsService);
+	chatsService = inject(ChatsService)
 
-  filterChatsControl = new FormControl('') //делаем контрол вне формы
+	filterChatsControl = new FormControl('') //делаем контрол вне формы
 
-  chats$ = this.chatsService.getMyChats() //запросили все чаты
-  //приобразуем к другому стриму
-      .pipe(
-          switchMap(chats => {
-            return this.filterChatsControl.valueChanges //сменили стрим и подписались на изменения контрола в инпуте
-                //когда контрол изменяется мы получается можем оперировать обоими значениями и чатами и значением того, что контрол дал
-                .pipe(
-                    startWith(''), //изначально чато нет
-                    map(inputValue => { //изменяем значение стрима, на отфильтрованные чаты
-                      return chats.filter(chat => {
-                        return `${chat.userFrom.lastName} ${chat.userFrom.firstName}`.toLowerCase().includes(inputValue!.toLowerCase() ?? '')
-                        //отфиртовали чаты, чтобы их можно было искать в инпуте по имени и фамилии
-                      })
-                    })
-                )
-          })
-      )
+	chats$ = this.chatsService
+		.getMyChats() //запросили все чаты
+		//приобразуем к другому стриму
+		.pipe(
+			switchMap((chats) => {
+				return (
+					this.filterChatsControl.valueChanges //сменили стрим и подписались на изменения контрола в инпуте
+						//когда контрол изменяется мы получается можем оперировать обоими значениями и чатами и значением того, что контрол дал
+						.pipe(
+							startWith(''), //изначально чато нет
+							map((inputValue) => {
+								//изменяем значение стрима, на отфильтрованные чаты
+								return chats.filter((chat) => {
+									return `${chat.userFrom.lastName} ${chat.userFrom.firstName}`
+										.toLowerCase()
+										.includes(inputValue!.toLowerCase() ?? '')
+									//отфиртовали чаты, чтобы их можно было искать в инпуте по имени и фамилии
+								})
+							})
+						)
+				)
+			})
+		)
 }

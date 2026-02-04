@@ -1,28 +1,55 @@
 :host {
-  width: 100%;
-  background: none;
-  border: none;
-  border-bottom: var(--light-border);
-  padding: 24px 20px;
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  grid-gap: 16px;
+	width: 100%;
+	background: none;
+	border: none;
+	border-bottom: var(--light-border);
+	padding: 24px 20px;
+	display: grid;
+	grid-template-columns: 32px 1fr 1fr;
+	grid-gap: 16px;
 }
 
 :host:hover,
 :host:focus-visible,
 :host.active {
-  background: var(--dark-hover-color);
-  cursor: pointer;
+	background: var(--dark-hover-color);
+	cursor: pointer;
+
+	.name {
+		color: var(--primary-color);
+	}
+
+	.time-message {
+		color: var(--primary-color);
+	}
 }
 
 .last-message-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  text-align: left;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	text-align: left;
 }
 
 .message-user {
-  color: var(--light-color);
+	color: var(--light-color);
+}
+
+.right-column {
+	position: relative;
+}
+
+.unread-mess {
+	position: absolute;
+	right: 0;
+	display: flex;
+	place-content: center;
+	background: var(--primary-color);
+	color: var(--dark-color);
+	width: 26px;
+	height: 18px;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 16px;
+	margin-top: 17px;
 }

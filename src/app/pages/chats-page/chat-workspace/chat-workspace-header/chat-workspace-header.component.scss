@@ -1,47 +1,47 @@
 :host {
-  display: flex;
-  justify-content: space-between;
-  color: var(--light-color);
-  padding: 16px 20px;
-  border-bottom: var(--light-border);
+	display: flex;
+	justify-content: space-between;
+	color: var(--light-color);
+	padding: 16px 20px;
+	border-bottom: var(--light-border);
 }
 
 .companion-wrapper {
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  grid-gap: 12px;
-  align-items: center;
+	display: grid;
+	grid-template-columns: 32px 1fr;
+	grid-gap: 12px;
+	align-items: center;
 }
 
 .back-arr {
-  width: 44px;
-  height: 44px;
-  border: var(--light-border);
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+	width: 44px;
+	height: 44px;
+	border: var(--light-border);
+	border-radius: 2px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 
-  &:hover,
-  &:focus-visible {
-    border: 1px solid var(--primary-color);
-  }
+	&:hover,
+	&:focus-visible {
+		border: 1px solid var(--primary-color);
+	}
 }
 
 .subtitle-chats {
-  font-size: 14px;
-  line-height: 24px;
-  font-weight: 700;
+	font-size: 14px;
+	line-height: 24px;
+	font-weight: 700;
 }
 
 .svg16 {
-  rotate: 90deg;
+	rotate: 90deg;
 }
 
 .svg9 {
-  width: 5px;
-  height: 9px;
-  color: var(--light-color);
-  rotate: 180deg;
+	width: 5px;
+	height: 9px;
+	color: var(--light-color);
+	rotate: 180deg;
 }

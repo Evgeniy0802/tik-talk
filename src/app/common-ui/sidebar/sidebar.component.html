@@ -1,96 +1,82 @@
-
 <div
-        class="img-svg-container ml16 mb20"
-        (clickApp)="onShowLogoTik($event)"
-        clickDnd
->
-  @if (photoSide) {
-        <img
-                src="/assets/imgs/grealish.png"
-                alt=""
-                class="img-side"
-        >
-  } @else {
-        <img
-                src="/assets/svg/logo-small.svg"
-                alt=""
-        >
-  }
+	class="img-svg-container ml16 mb20"
+	(clickApp)="onShowLogoTik($event)"
+	clickDnd>
+	@if (photoSide) {
+		<img src="/assets/imgs/grealish.png" alt="" class="img-side" />
+	} @else {
+		<img src="/assets/svg/logo-small.svg" alt="" />
+	}
 </div>
 
-
-
-
-
 <nav>
-    <ul class="main-menu-list">
-        @for (menuItem of menuItems; track menuItems) {
-          <li>
-            <a
-                    class="menu-item"
-                    [routerLink]="[menuItem.link]"
-                    routerLinkActive="active"
-            >
-                <svg [icon]="menuItem.icon"></svg>
-                <span>{{ menuItem.label }}</span>
-            </a>
-          </li>
-        }
-    </ul>
+	<ul class="main-menu-list">
+		@for (menuItem of menuItems; track menuItems) {
+			<li>
+				<a
+					class="menu-item"
+					[routerLink]="[menuItem.link]"
+					routerLinkActive="active">
+					<svg [icon]="menuItem.icon"></svg>
+					<span>{{ menuItem.label }}</span>
+				</a>
+			</li>
+		}
+	</ul>
 </nav>
 
 <p class="medium-text mb20 mt20 pl16">Подписчики</p>
 
-
 @for (profile of subscribers$ | async; track profile.id) {
-  <app-subscriber-card
-          [profile]="profile"
-  ></app-subscriber-card>
+	<app-subscriber-card [profile]="profile"></app-subscriber-card>
 }
 
 <div class="mt20 to-subscribers">
-    <a
-            [routerLink]="['/subscribers']"
-            class="to-subscribers-link medium-text pl16"
-    >Все подписчики</a>
-    <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" id="arrow">
-        <path d="M0.222657 8.44531L3.66797 5L0.222656 1.55469L1.27734 0.5L5.77734 5L1.27734 9.5L0.222657 8.44531Z"
-              fill="#AE7AFF"/>
-    </svg>
+	<a
+		[routerLink]="['/subscribers']"
+		class="to-subscribers-link medium-text pl16"
+		>Все подписчики</a
+	>
+	<svg
+		width="6"
+		height="10"
+		viewBox="0 0 6 10"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		id="arrow">
+		<path
+			d="M0.222657 8.44531L3.66797 5L0.222656 1.55469L1.27734 0.5L5.77734 5L1.27734 9.5L0.222657 8.44531Z"
+			fill="#AE7AFF" />
+	</svg>
 </div>
 
-
 <footer class="sidebar__footer">
-@if (me(); as me) {
-       @if (me.avatarUrl) {
-             <img
-                     clickDnd
-                     (clickApp)="onSowStatus($event)"
-                     [src]="me.avatarUrl | imgUrl"
-                     alt="">
-       } @else {
-             <img src="/assets/imgs/avatar-placeholder.png" alt="">
-       }
+	@if (me(); as me) {
+		@if (me.avatarUrl) {
+			<img
+				clickDnd
+				(clickApp)="onSowStatus($event)"
+				[src]="me.avatarUrl | imgUrl"
+				alt="" />
+		} @else {
+			<img src="/assets/imgs/avatar-placeholder.png" alt="" />
+		}
 
+		<div class="medium-text username-text">{{ me.username }}</div>
 
-
-    <div class="medium-text username-text">{{ me.username }}</div>
-
-    <a [routerLink]="['settings']" class="settings-btn">
-        <svg icon="settings"></svg>
-    </a>
-}
-
+		<a [routerLink]="['settings']" class="settings-btn">
+			<svg icon="settings"></svg>
+		</a>
+	}
 </footer>
 
 @if (fileLogout) {
-    <div class="exit-account">
-        <div class="exit">
-            <button class="btn-ex" [routerLink]="['/login']">
-                  <svg icon="logout" class="svg-ex"></svg>
-                  <span class="ex-txt">Выход</span>
-            </button>
-        </div>
-    </div>
+	<div class="exit-account">
+		<div class="exit">
+			<button class="btn-ex" [routerLink]="['/login']">
+				<svg icon="logout" class="svg-ex"></svg>
+				<span class="ex-txt">Выход</span>
+			</button>
+		</div>
+	</div>
 }
-

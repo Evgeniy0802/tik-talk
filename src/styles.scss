@@ -1,227 +1,227 @@
-@import "fonts";
-@import "margins";
+@import 'fonts';
+@import 'margins';
 
 :root {
-  --dark-color: #000000;
-  --light-color: #FFFFFF;
-  --primary-color: #AE7AFF;
-  --gray-color: #5F646D;
-  --light-transparent-color: #FFFFFFBF;
-  --dark-hover-color: #161616;
-  --light-transparent-form-color: rgba(255, 255, 255, 0.75);
-  --message-color: #404040;
+	--dark-color: #000000;
+	--light-color: #ffffff;
+	--primary-color: #ae7aff;
+	--gray-color: #5f646d;
+	--light-transparent-color: #ffffffbf;
+	--dark-hover-color: #161616;
+	--light-transparent-form-color: rgba(255, 255, 255, 0.75);
+	--message-color: #404040;
 
-  --light-border: 1px solid var(--light-color);
+	--light-border: 1px solid var(--light-color);
 }
 
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 .workspace::-webkit-scrollbar {
-  display: none; /* Полностью скрывает визуальное отображение скроллбара */
-  width: 0; /* Или установите ширину в 0, чтобы гарантировать его отсутствие */
+	display: none; /* Полностью скрывает визуальное отображение скроллбара */
+	width: 0; /* Или установите ширину в 0, чтобы гарантировать его отсутствие */
 }
 
 body {
-  height: 100dvh;
-  overflow: hidden;
-  font-family: "JetBrains Mono", sans-serif;
-  background: var(--dark-color);
-  color: var(--light-color);
-  background-image: url(/assets/imgs/background.jpg);
-  background-size: cover;
+	height: 100dvh;
+	overflow: hidden;
+	font-family: 'JetBrains Mono', sans-serif;
+	background: var(--dark-color);
+	color: var(--light-color);
+	background-image: url(/assets/imgs/background.jpg);
+	background-size: cover;
 }
 
 .skill-tag {
-  padding: 0 8px;
-  border-radius: 4px;
-  border: 1px solid var(--light-color);
-  display: inline;
-  font-size: 12px;
-  line-height: 24px;
-  font-weight: 700;
-  height: 24px;
+	padding: 0 8px;
+	border-radius: 4px;
+	border: 1px solid var(--light-color);
+	display: inline;
+	font-size: 12px;
+	line-height: 24px;
+	font-weight: 700;
+	height: 24px;
 }
 
-.btn  {
-  width: 100%;
-  border: 1px solid var(--dark-color);
-  background: var(--primary-color);
-  color: var(--dark-color);
-  padding: 10px 20px;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 24px;
-  cursor: pointer;
-  border-radius: 4px;
+.btn {
+	width: 100%;
+	border: 1px solid var(--dark-color);
+	background: var(--primary-color);
+	color: var(--dark-color);
+	padding: 10px 20px;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 24px;
+	cursor: pointer;
+	border-radius: 4px;
 }
 
 .btn-icon {
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--dark-color);
-  background: var(--primary-color);
-  color: var(--dark-color);
-  cursor: pointer;
-  border-radius: 4px;
+	width: 44px;
+	height: 44px;
+	border: 1px solid var(--dark-color);
+	background: var(--primary-color);
+	color: var(--dark-color);
+	cursor: pointer;
+	border-radius: 4px;
 
-  &:hover,
-  &:focus-visible {
-    border: 1px solid var(--light-color);
-  }
+	&:hover,
+	&:focus-visible {
+		border: 1px solid var(--light-color);
+	}
 }
 
 .btn-search {
-  position: absolute;
-  width: 46px;
-  height: 46px;
-  background: var(--primary-color);
-  border: 1px solid var(--dark-color);
-  right: 20px;
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
+	position: absolute;
+	width: 46px;
+	height: 46px;
+	background: var(--primary-color);
+	border: 1px solid var(--dark-color);
+	right: 20px;
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
 
-  &:hover,
-  &:focus-visible {
-    border: 1px solid var(--light-color);
-  }
+	&:hover,
+	&:focus-visible {
+		border: 1px solid var(--light-color);
+	}
 }
 
 .svg16 {
-  width: 16px;
-  height: 16px;
+	width: 16px;
+	height: 16px;
 }
 
 .svg12 {
-  width: 12px;
-  height: 12px;
+	width: 12px;
+	height: 12px;
 }
 
 .btn-shadow {
-  position: relative;
+	position: relative;
 
-  &:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    bottom: -4px;
-    right: -4px;
-    background: var(--gray-color);
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-  }
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		bottom: -4px;
+		right: -4px;
+		background: var(--gray-color);
+		width: 100%;
+		height: 100%;
+		border-radius: 4px;
+	}
 }
 
 .h1 {
-  font-size: 48px;
-  line-height: 56px;
-  font-weight: 800;
+	font-size: 48px;
+	line-height: 56px;
+	font-weight: 800;
 }
 
 .h4 {
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 24px;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 24px;
 }
 
 .h6 {
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 800;
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: 800;
 }
 
 .subtitle {
-  font-size: 14px;
-  line-height: 21px;
-  font-weight: 400;
+	font-size: 14px;
+	line-height: 21px;
+	font-weight: 400;
 }
 
 .medium-text {
-  font-family: "JetBrains Mono", sans-serif;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 500;
-  color: var(--light-transparent-color);
+	font-family: 'JetBrains Mono', sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 500;
+	color: var(--light-transparent-color);
 }
 
 .medium-text-option {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 21px;
-  color: var(--light-color);
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 21px;
+	color: var(--light-color);
 }
 
 .regular {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 21px;
 }
 
 .tt-control-label {
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px;
-  display: block;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 16px;
+	display: block;
 }
 
 .tt-input {
-  width: 100%;
-  margin-top: 8px;
-  display: block;
-  border: 1px solid var(--light-color);
-  border-radius: 4px;
-  padding: 12px 20px;
-  background: var(--dark-color);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 21px;
-  font-family: "JetBrains Mono", sans-serif;
-  color: var(--light-color);
+	width: 100%;
+	margin-top: 8px;
+	display: block;
+	border: 1px solid var(--light-color);
+	border-radius: 4px;
+	padding: 12px 20px;
+	background: var(--dark-color);
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 21px;
+	font-family: 'JetBrains Mono', sans-serif;
+	color: var(--light-color);
 }
 
 .tt-form-label {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }
 
 .tt-form-label__text {
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
-  color: var(--light-transparent-form-color);
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 16px;
+	color: var(--light-transparent-form-color);
 }
 
 .tt-form-input {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  border: none;
-  background: none;
-  color: var(--light-color);
-  border-bottom: 1px solid var(--light-color);
-  height: 33px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 20px;
+	border: none;
+	background: none;
+	color: var(--light-color);
+	border-bottom: 1px solid var(--light-color);
+	height: 33px;
 
-  &:focus-visible {
-    outline: 1px solid var(--primary-color);
-    border-radius: 4px;
-  }
+	&:focus-visible {
+		outline: 1px solid var(--primary-color);
+		border-radius: 4px;
+	}
 }
 
 .tt-textarea {
-  height: 84px;
-  resize: none;
+	height: 84px;
+	resize: none;
 }

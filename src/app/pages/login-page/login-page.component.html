@@ -1,55 +1,42 @@
-<form
-        class="login-form"
-        [formGroup]="form"
-        (ngSubmit)="onSubmit($event)"
->
-    <h1 class="h1 mb60">Вход</h1>
+<form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+	<h1 class="h1 mb60">Вход</h1>
 
-    <label class="tt-control-label mb16">
-        Telegram username
+	<label class="tt-control-label mb16">
+		Telegram username
 
-        <div class="telegram-input">
-          <input
-                  formControlName="username"
-                  class="tt-input"
-                  type="text"
-                  placeholder="Введите логин"
-          >
+		<div class="telegram-input">
+			<input
+				formControlName="username"
+				class="tt-input"
+				type="text"
+				placeholder="Введите логин" />
 
-          <button
-                  type="button"
-                  class="telegram-btn"
-          >
-              <svg icon="telegram" class="tg-svg"></svg>
-          </button>
-        </div>
-    </label>
+			<button type="button" class="telegram-btn">
+				<svg icon="telegram" class="tg-svg"></svg>
+			</button>
+		</div>
+	</label>
 
-    <label class="tt-control-label mb32">
-        Пароль
+	<label class="tt-control-label mb32">
+		Пароль
 
-      <div class="password-input">
-        <input
-                formControlName="password"
-                class="tt-input"
-                [type]="isPasswordVisible() ? 'text' : 'password'"
-                placeholder="Введите пароль"
-        >
-           <button
-                   type="button"
-                   class="password-eye-btn"
-                   [class.active]="isPasswordVisible()"
-                   (click)="isPasswordVisible.set(!isPasswordVisible())"
-           >
+		<div class="password-input">
+			<input
+				formControlName="password"
+				class="tt-input"
+				[type]="isPasswordVisible() ? 'text' : 'password'"
+				placeholder="Введите пароль" />
+			<button
+				type="button"
+				class="password-eye-btn"
+				[class.active]="isPasswordVisible()"
+				(click)="isPasswordVisible.set(!isPasswordVisible())">
+				<svg icon="eye" class="eye-svg"></svg>
+			</button>
+		</div>
+	</label>
 
-
-             <svg icon="eye" class="eye-svg"></svg>
-           </button>
-     </div>
-    </label>
-
-
-    <button class="btn btn-shadow" type="submit">Войти</button>
+	<button class="btn btn-shadow" type="submit">Войти</button>
 </form>
 
-<img src="/assets/svg/logo-big.svg" class="big-logo" alt="logo">
+<img src="/assets/svg/logo-big.svg" class="big-logo" alt="logo" />

@@ -1,22 +1,22 @@
 :host {
-  border-right: var(--light-border);
-  display: block;
+	border-right: var(--light-border);
+	display: block;
 }
 
 .chats-filters-input-wrapper {
-  padding: 16px 20px;
-  border-bottom: var(--light-border);
+	padding: 16px 20px;
+	border-bottom: var(--light-border);
 }
 
 .tt-form-label {
-  position: relative;
+	position: relative;
 }
 
 .search-filter-svg {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  margin-bottom: 12px;
-  width: 12px;
-  height: 12px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin-bottom: 12px;
+	width: 12px;
+	height: 12px;
 }

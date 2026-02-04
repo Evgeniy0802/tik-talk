@@ -1,16 +1,19 @@
 <div class="chats-filters-input-wrapper">
-    <label class="tt-form-label">
-        <span class="tt-form-label__text"></span>
-        <input placeholder="Искать..." type="text" class="tt-form-input" [formControl]="filterChatsControl">
-        <svg icon="search" class="search-filter-svg"></svg>
-    </label>
+	<label class="tt-form-label">
+		<span class="tt-form-label__text"></span>
+		<input
+			placeholder="Искать..."
+			type="text"
+			class="tt-form-input"
+			[formControl]="filterChatsControl" />
+		<svg icon="search" class="search-filter-svg"></svg>
+	</label>
 </div>
 
 @for (chat of chats$ | async; track chat.id) {
-  <button
-          chats
-          [chat]="chat"
-          [routerLink]="[chat.id]"
-          routerLinkActive="active"
-  ></button>
+	<button
+		chats
+		[chat]="chat"
+		[routerLink]="[chat.id]"
+		routerLinkActive="active"></button>
 }
