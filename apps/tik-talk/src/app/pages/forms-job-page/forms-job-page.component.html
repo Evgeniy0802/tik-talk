@@ -1,0 +1,197 @@
+<form class="form-wb" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+	<h4 class="h4 mb16 info">Информация о сотруднике</h4>
+
+	<label class="tt-control-label mb16">
+		Организация
+		<input
+			class="tt-input"
+			formControlName="organization"
+			type="text"
+			placeholder="" />
+	</label>
+
+	<!--@if (form.touched && form.invalid) если форма потрогана и невалидна { -->
+	<small class="error-message">Все поля обязательны !!!</small>
+
+	<label class="tt-control-label mb16">
+		Тип сотрудника
+		<select class="tt-input" formControlName="type">
+			<option [value]="ReceiverType.executor">Исполнитель</option>
+			<option [value]="ReceiverType.responsible">Ответственный</option>
+			<option [value]="ReceiverType.supervisor">Руководитель</option>
+			<option [value]="ReceiverType.analyst">Аналитик</option>
+		</select>
+	</label>
+
+	<div class="adr-sk">
+		<label class="tt-control-label mb16">
+			Имя
+			<input
+				class="tt-input"
+				formControlName="name"
+				type="text"
+				placeholder="Введите имя" />
+		</label>
+		<!--@if (form.controls.name.touched && form.controls.name.hasError('startsWith')) {
+      <small class="h4">{{ form.controls.name.getError('startsWith')?.message }}</small>
+    } -->
+
+		<label class="tt-control-label mb16">
+			Фамилия
+			<input
+				class="tt-input"
+				formControlName="lastName"
+				type="text"
+				placeholder="Введите фамилию" />
+		</label>
+
+		@if (
+			form.controls.type.value === ReceiverType.supervisor ||
+			form.controls.type.value === ReceiverType.analyst
+		) {
+		} @else {
+			@if (form.controls.type.value === ReceiverType.executor) {
+				<label class="tt-control-label mb16">
+					Операция
+					<select class="tt-input" formControlName="operation">
+						@for (oper of operations; track oper.value) {
+							<option [value]="oper.value">
+								{{ oper.label }}
+							</option>
+						}
+					</select>
+				</label>
+			} @else {
+				<label class="tt-control-label mb16">
+					Зона ответственности
+					<input
+						class="tt-input"
+						formControlName="areaResponsibility"
+						type="text"
+						placeholder="Введите зону ответсвенности" />
+				</label>
+			}
+
+			<label class="tt-control-label mb16">
+				ID сотрудника
+				<input
+					class="tt-input"
+					formControlName="id"
+					type="text"
+					placeholder="Введите id"
+					onlyNumber />
+			</label>
+		}
+
+		<label class="tt-control-label mb16">
+			Номер телефона
+			<input
+				type="tel"
+				class="tt-input"
+				formControlName="telephone"
+				[maskito]="phoneMask" />
+		</label>
+
+		<label class="tt-control-label mb16">
+			Снилс
+			<input class="tt-input" formControlName="snils" type="text" onlyNumber />
+		</label>
+	</div>
+
+	<div class="two-columns" formGroupName="dateRange">
+		<label class="tt-control-label mb16">
+			От
+			<input
+				class="tt-input"
+				formControlName="from"
+				type="text"
+				[maskito]="dateMask" />
+		</label>
+
+		<label class="tt-control-label mb16">
+			До
+			<input
+				class="tt-input"
+				formControlName="to"
+				type="text"
+				[maskito]="dateMask" />
+		</label>
+	</div>
+	<!-- @if (form.controls.dateRange.touched && form.controls.dateRange.hasError('dateRange')) {
+    <small>{{ form.controls.dateRange.getError('dateRange')?.message }}</small>
+  }-->
+
+	<div class="one-h-two-btn">
+		<h4 class="h4 mb16">Адрес склада</h4>
+		<div class="btn-adr-plus-minus">
+			<button class="btn-add-remove" type="button" (click)="addAddress()">
+				+
+			</button>
+			<button class="btn-add-remove" type="button" (click)="deleteAddress(1)">
+				-
+			</button>
+		</div>
+	</div>
+
+	@for (
+		group of form.controls.addresses.controls;
+		track group;
+		let i = $index
+	) {
+		<div class="adr-sk" [formGroup]="group">
+			<label class="tt-control-label mb16">
+				Область
+				<input
+					class="tt-input"
+					formControlName="region"
+					type="text"
+					placeholder="Введите область" />
+			</label>
+
+			<label class="tt-control-label mb16">
+				Город
+				<input
+					class="tt-input"
+					formControlName="city"
+					type="text"
+					placeholder="Введите город" />
+			</label>
+
+			<label class="tt-control-label mb16">
+				Улица
+				<input
+					class="tt-input"
+					formControlName="street"
+					type="text"
+					placeholder="Введите улицу" />
+			</label>
+
+			<label class="tt-control-label mb16">
+				Дом
+				<input
+					class="tt-input"
+					formControlName="building"
+					type="text"
+					placeholder="Введите дом"
+					onlyNumber />
+			</label>
+		</div>
+
+		<div [formGroup]="form.controls.feature">
+			<h4 class="mb16 h6">Дополнительно</h4>
+			<div class="additional-options">
+				@for (
+					control of form.controls.feature.controls | keyvalue: sort;
+					track control;
+					let i = $index
+				) {
+					<label>
+						{{ features[i].label }}
+						<input type="checkbox" [formControlName]="control.key" />
+					</label>
+				}
+			</div>
+		</div>
+	}
+	<button class="btn-form-sk btn-shadow" type="submit">Отправить</button>
+</form>
