@@ -68,3 +68,29 @@
 .white {
 	color: var(--light-color);
 }
+
+.btn-go-work {
+	position: relative;
+}
+
+.btn-work {
+	position: absolute;
+	width: 44px;
+	height: 44px;
+	background: var(--primary-color);
+	right: 0;
+	bottom: 50%;
+	cursor: pointer;
+	border-radius: 4px;
+	border: 1px solid var(--dark-color);
+
+	&:hover,
+	&:focus-visible {
+		border: 1px solid var(--light-color);
+	}
+}
+
+.work-img {
+	width: 32px;
+	height: 32px;
+}

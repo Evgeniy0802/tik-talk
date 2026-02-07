@@ -17,6 +17,8 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@maskito/angular": "^5.1.0",
+    "@maskito/core": "^5.1.0",
     "@types/luxon": "^3.7.1",
     "luxon": "^3.7.2",
     "ngx-cookie-service": "^21.1.0",
