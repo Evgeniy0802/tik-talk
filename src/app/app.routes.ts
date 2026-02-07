@@ -8,6 +8,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { CommunitiesPageComponent } from './pages/communities-page/communities-page.component'
 import { ChatsPageComponent } from './pages/chats-page/chats-page.component'
 import { chatsRoutes } from './pages/chats-page/chatsRoutes'
+import {FormsJobPageComponent} from "./pages/forms-job-page/forms-job-page.component";
 
 export const routes: Routes = [
 	{
@@ -18,6 +19,7 @@ export const routes: Routes = [
 			{ path: 'search', component: SearchPageComponent },
 			{ path: 'profile/:id', component: ProfilePageComponent },
 			{ path: 'settings', component: SettingsPageComponent },
+			{ path: 'jobs', component: FormsJobPageComponent},
 			{ path: 'communities', component: CommunitiesPageComponent },
 			{
 				path: 'chats',

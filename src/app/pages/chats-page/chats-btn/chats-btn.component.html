@@ -15,7 +15,7 @@
 			{{ chat.createdAt | date: 'dd.MM.yyyy HH:mm' : 'UTC+0600' }}
 		</div>
 
-		@if (chat.unreadMessages) {
+		@if (chat.unreadMessages > 0) {
 			<div class="unread-mess">{{ chat.unreadMessages }}</div>
 		}
 	</div>

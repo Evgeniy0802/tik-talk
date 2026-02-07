@@ -47,7 +47,8 @@ export class SettingsPageComponent {
 		lastName: ['', Validators.required],
 		username: [{ value: '', disabled: true }, Validators.required],
 		description: [''],
-		stack: ['']
+		stack: [''],
+		city: ['']
 	})
 
 	constructor() {
@@ -85,8 +86,8 @@ export class SettingsPageComponent {
 			//если аватар есть загрузим его
 		}
 
-		//@ts-ignore
 		firstValueFrom(
+			//@ts-ignore
 			this.profileService.patchProfile({
 				...this.form.value,
 				stack: this.splitStack(this.form.value.stack)

@@ -1,0 +1,120 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-y: scroll;
+}
+
+:host::-webkit-scrollbar {
+  display: none;
+}
+
+.form-wb {
+  width: 600px;
+}
+
+.info {
+  text-align: center;
+}
+
+.adr-sk {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: 40px;
+}
+
+.tt-input::-webkit-inner-spin-button,
+.tt-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tt-input {
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--primary-color);
+  }
+}
+
+.btn-form-sk {
+  width: 100%;
+  height: 40px;
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+  border: 1px solid var(--dark-color);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.error-message {
+  position: absolute;
+  border: 1px solid var(--dark-color);
+  border-radius: 4px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 210px;
+  min-height: min-content;
+  background: var(--primary-color);
+  color: var(--dark-color);
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 800;
+}
+
+.one-h-two-btn {
+  display: grid;
+  grid-template-columns: 1fr 108px;
+}
+
+.btn-adr-plus-minus {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-add-remove {
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  background: var(--primary-color);
+  border: 1px solid var(--dark-color);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--light-color);
+  }
+}
+
+.additional-options {
+  display: grid;
+  grid-gap: 16px;
+  margin-bottom: 16px;
+}
+
+.tt-input.ng-invalid.ng-touched {
+  border: 1px solid var(--red-color);
+}
+
+//.ng-submitted { бордер вокргур формы
+//border: 10px var(--primary-color);
+//}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 12px;
+  margin-top: 20px;
+}
+
+.tt-input::-webkit-calendar-picker-indicator {
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
