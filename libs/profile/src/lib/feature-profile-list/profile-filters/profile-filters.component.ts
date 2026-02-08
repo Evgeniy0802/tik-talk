@@ -6,7 +6,8 @@ import {
 } from '@angular/forms'
 import { debounceTime, startWith, Subscription, switchMap } from 'rxjs'
 import {SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/data-access/profiles";
+import {profileActions, ProfileService} from "@tt/data-access/profiles";
+import {Store} from "@ngrx/store";
 
 @Component({
 	selector: 'app-profile-filters',
@@ -18,6 +19,7 @@ export class ProfileFiltersComponent implements OnDestroy {
 	// implements OnDestroy озночает что мы обязуемся основываться на интерфейсе onDestroy, а это значит что должен быть такой метод
 	fb = inject(FormBuilder)
 	profileService = inject(ProfileService)
+	store = inject(Store)
 
 	searchForm = this.fb.group({
 		firstName: [''],
@@ -33,14 +35,13 @@ export class ProfileFiltersComponent implements OnDestroy {
 			.pipe(
 				startWith({}),
 				debounceTime(300),
-				switchMap((formValue) => {
-					return this.profileService.filterProfiles(formValue)
-				})
 				//takeUntilDestroyed()
 				//takeUntil(this.destroy$)
 				//takeUntil() значит что мы будем исполнять и применять эту подписку до тех пор пока не закончится стрим который мы укажем в takeUntil
 			)
-			.subscribe()
+			.subscribe(formValue => {
+				this.store.dispatch(profileActions.filterEvents({filters: formValue}))
+			})
 	}
 
 	ngOnDestroy() {

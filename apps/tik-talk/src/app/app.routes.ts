@@ -4,6 +4,10 @@ import {FormsJobPageComponent, ProfilePageComponent, SearchPageComponent, Settin
 import {chatsRoutes} from "@tt/chats";
 import {LayoutComponent} from "@tt/layout";
 import {CommunitiesPageComponent} from "@tt/communities";
+import {provideState} from "@ngrx/store";
+import {provideEffects} from "@ngrx/effects";
+import {ProfileEffects, profileFeature} from "@tt/data-access/profiles";
+
 
 export const routes: Routes = [
 	{
@@ -11,7 +15,14 @@ export const routes: Routes = [
 		component: LayoutComponent,
 		children: [
 			{ path: '', redirectTo: 'profile/me', pathMatch: 'full' },
-			{ path: 'search', component: SearchPageComponent },
+			{
+				path: 'search',
+				component: SearchPageComponent,
+				providers: [
+					provideState(profileFeature),
+					provideEffects(ProfileEffects)
+				]
+			},
 			{ path: 'profile/:id', component: ProfilePageComponent },
 			{ path: 'settings', component: SettingsPageComponent },
 			{ path: 'jobs', component: FormsJobPageComponent },
