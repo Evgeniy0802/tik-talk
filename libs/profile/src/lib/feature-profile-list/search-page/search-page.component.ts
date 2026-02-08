@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core'
 import { ProfileCardComponent } from '../../ui'
 import { ProfileFiltersComponent } from '../../feature-profile-list'
 import { AsyncPipe } from '@angular/common'
-import {ProfileService} from "../../data";
+import {ProfileService} from "@tt/data-access/profiles";
 
 @Component({
 	selector: 'app-search-page',

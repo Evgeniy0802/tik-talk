@@ -18,8 +18,8 @@ import {
 } from 'rxjs'
 import {PostInputComponent} from "../../ui";
 import {PostComponent} from "../post/post.component";
-import {PostService} from "../../data";
-import {GlobalStoreService} from "@tt/shared";
+import {PostService} from "@tt/data-access/posts";
+import {GlobalStoreService} from "@tt/data-access/shared";
 
 
 @Component({

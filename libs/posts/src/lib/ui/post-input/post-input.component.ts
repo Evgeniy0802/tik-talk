@@ -8,9 +8,9 @@ import {
 	Renderer2
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import {PostService} from "../../data";
 import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui"
-import {GlobalStoreService} from "@tt/shared";
+import {PostService} from "@tt/data-access/posts";
+import {GlobalStoreService} from "@tt/data-access/shared";
 
 @Component({
 	selector: 'app-post-input',

@@ -1,10 +1,10 @@
-import { Component, inject }     from '@angular/core'
+import { Component, inject } from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
-import { ChatsService }        from '../../data'
 import {filter, of, switchMap} from 'rxjs'
-import { AsyncPipe }           from '@angular/common'
+import { AsyncPipe } from '@angular/common'
 import {ChatWorkspaceMessagesWrapperComponent} from "./chat-workspace-messages-wrapper/chat-workspace-messages-wrapper.component";
 import {ChatWorkspaceHeaderComponent} from "./chat-workspace-header/chat-workspace-header.component";
+import {ChatsService} from "@tt/data-access/chats";
 
 @Component({
 	selector: 'app-chat-workspace',

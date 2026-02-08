@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router'
 import {canActivateAuth, LoginPageComponent} from '@tt/auth'
-import { CommunitiesPageComponent } from './pages/communities-page/communities-page.component'
-import { FormsJobPageComponent } from './pages/forms-job-page/forms-job-page.component'
-import {ProfilePageComponent, SearchPageComponent, SettingsPageComponent} from "@tt/profile";
+import {FormsJobPageComponent, ProfilePageComponent, SearchPageComponent, SettingsPageComponent} from "@tt/profile";
 import {chatsRoutes} from "@tt/chats";
 import {LayoutComponent} from "@tt/layout";
+import {CommunitiesPageComponent} from "@tt/communities";
 
 export const routes: Routes = [
 	{

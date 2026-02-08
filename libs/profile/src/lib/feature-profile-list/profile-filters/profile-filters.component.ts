@@ -6,7 +6,7 @@ import {
 } from '@angular/forms'
 import { debounceTime, startWith, Subscription, switchMap } from 'rxjs'
 import {SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/profile";
+import {ProfileService} from "@tt/data-access/profiles";
 
 @Component({
 	selector: 'app-profile-filters',

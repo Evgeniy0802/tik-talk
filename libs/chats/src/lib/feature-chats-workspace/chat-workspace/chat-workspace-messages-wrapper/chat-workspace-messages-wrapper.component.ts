@@ -7,8 +7,6 @@ import {
 	ViewChild
 } from '@angular/core'
 import { MessageInputComponent } from '../../../ui'
-import { ChatsService } from '../../../data'
-import { Chat, Message } from '../../../data'
 import {
 	debounceTime,
 	firstValueFrom,
@@ -19,6 +17,7 @@ import {
 } from 'rxjs'
 import { DateTime } from 'luxon'
 import {ChatWorkspaceMessageComponent} from "./chat-workspace-message/chat-workspace-message.component";
+import {Chat, ChatsService, Message} from "@tt/data-access/chats";
 
 @Component({
 	selector: 'app-chat-workspace-messages-wrapper',

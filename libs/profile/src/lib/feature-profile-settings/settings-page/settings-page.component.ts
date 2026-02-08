@@ -10,7 +10,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router'
 import { AsyncPipe } from '@angular/common'
 import { toObservable } from '@angular/core/rxjs-interop'
 import {SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "../../data";
+import {ProfileService} from "@tt/data-access/profiles";
 
 @Component({
 	selector: 'app-settings-page',

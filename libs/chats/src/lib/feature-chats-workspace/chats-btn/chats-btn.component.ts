@@ -1,7 +1,7 @@
 import {Component, input} from '@angular/core'
 import {DatePipe} from '@angular/common'
-import {LastMessageRes} from "../../data";
 import {AvatarCircleComponent} from "@tt/common-ui";
+import {LastMessageRes} from "@tt/data-access/chats";
 
 @Component({
     selector: 'button[chats]', //будет такой компонент если chats будет там
