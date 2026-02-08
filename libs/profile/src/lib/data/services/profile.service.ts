@@ -1,14 +1,15 @@
 import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Profile } from '../interfaces/profile.interface'
 import { map, tap } from 'rxjs'
-import {Pageable} from "@tt/shared";
+import {GlobalStoreService, Pageable} from "@tt/shared";
+import {Profile} from "@tt/interfaces/profile";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ProfileService {
 	http = inject(HttpClient)
+	#globalStoreService = inject(GlobalStoreService)
 	baseApiUrl = 'https://icherniakov.ru/yt-course/'
 
 	me = signal<Profile | null>(null)
@@ -23,7 +24,11 @@ export class ProfileService {
 	getMe() {
 		return this.http
 			.get<Profile>(`${this.baseApiUrl}account/me`) //возвращаем свой аккаунт, получаем информацию о себе
-			.pipe(tap((res) => this.me.set(res)))
+			.pipe(tap((res) => {
+				this.me.set(res)
+				this.#globalStoreService.me.set(res)
+				//#нативная переменная в js приватная
+			}))
 	}
 
 	getAccount(id: string) {

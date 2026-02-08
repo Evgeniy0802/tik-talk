@@ -19,7 +19,7 @@ import {
 import {PostInputComponent} from "../../ui";
 import {PostComponent} from "../post/post.component";
 import {PostService} from "../../data";
-import {ProfileService} from "@tt/profile";
+import {GlobalStoreService} from "@tt/shared";
 
 
 @Component({
@@ -33,7 +33,7 @@ export class PostFeedComponent {
 	hostElement = inject(ElementRef) //нужна для того чтобы мы рендерелись на абсолютно разных платформах
 	r2 = inject(Renderer2)
 	private destroy$ = new Subject<void>()
-	profile = inject(ProfileService).me
+	profile = inject(GlobalStoreService).me
 
 	feed: any[] = []
 

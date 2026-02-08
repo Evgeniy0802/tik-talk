@@ -3,7 +3,7 @@ import {firstValueFrom} from 'rxjs'
 import {CommentComponent, PostInputComponent} from "../../ui";
 import {Post, PostComment, PostService} from "../../data";
 import {AvatarCircleComponent, DateTimePipe, SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/profile";
+import {GlobalStoreService} from "@tt/shared";
 
 @Component({
     selector: 'app-post',
@@ -22,7 +22,7 @@ export class PostComponent implements OnInit {
     comments = signal<PostComment[]>([])
 
     postService = inject(PostService)
-    profile = inject(ProfileService).me
+    profile = inject(GlobalStoreService).me
 
     //нам не нужно делать запрос на каждую сущность
     async ngOnInit() {

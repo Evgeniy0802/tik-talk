@@ -9,8 +9,8 @@ import {
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import {PostService} from "../../data";
-import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/profile";
+import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui"
+import {GlobalStoreService} from "@tt/shared";
 
 @Component({
 	selector: 'app-post-input',
@@ -24,7 +24,7 @@ export class PostInputComponent {
 
 	isCommentInput = input(false)
 	postId = input<number>(0)
-	profile = inject(ProfileService).me
+	profile = inject(GlobalStoreService).me
 
 	//когда создаётся post сделаем output событие
 	@Output() created = new EventEmitter()

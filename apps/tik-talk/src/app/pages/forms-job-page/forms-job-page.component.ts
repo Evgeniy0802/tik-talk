@@ -16,8 +16,8 @@ import { MaskitoDirective } from '@maskito/angular'
 import { JobsService } from '../../data/services/job.service'
 import { Feature, OperationOption } from '../../data/interfaces/job.interface'
 import { NameValidator } from './name.validator'
-import { OnlyNumberDirective } from '../../common-ui/directives/only-number.directive'
 import { MaskitoOptions } from '@maskito/core'
+import {OnlyNumberDirective} from "@tt/common-ui";
 
 function validateStartWith(forbiddenLetter: string): ValidatorFn {
 	return (control: AbstractControl) => {

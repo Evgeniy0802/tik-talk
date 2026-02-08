@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Chat, LastMessageRes, Message } from '../interfaces/chats.interface'
+import { Chat, LastMessageRes, Message } from '../../data'
 import { map } from 'rxjs'
 import {ProfileService} from "@tt/profile";
 
