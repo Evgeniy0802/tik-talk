@@ -7,6 +7,7 @@ import {CommunitiesPageComponent} from "@tt/communities";
 import {provideState} from "@ngrx/store";
 import {provideEffects} from "@ngrx/effects";
 import {ProfileEffects, profileFeature} from "@tt/data-access/profiles";
+import {PostEffects, postsFeature} from "@tt/data-access/posts";
 
 
 export const routes: Routes = [
@@ -23,7 +24,13 @@ export const routes: Routes = [
 					provideEffects(ProfileEffects)
 				]
 			},
-			{ path: 'profile/:id', component: ProfilePageComponent },
+			{
+				path: 'profile/:id', component: ProfilePageComponent,
+				providers: [
+					provideState(postsFeature),
+					provideEffects(PostEffects)
+				]
+			},
 			{ path: 'settings', component: SettingsPageComponent },
 			{ path: 'jobs', component: FormsJobPageComponent },
 			{ path: 'communities', component: CommunitiesPageComponent },

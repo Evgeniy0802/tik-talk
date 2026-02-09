@@ -17,9 +17,10 @@ import {
 	takeUntil,
 } from 'rxjs'
 import {PostInputComponent} from "../../ui";
-import {PostComponent} from "../post/post.component";
-import {PostService} from "@tt/data-access/posts";
-import {GlobalStoreService} from "@tt/data-access/shared";
+import {PostComponent}                         from "../post/post.component";
+import {postActions, PostService, selectPosts} from "@tt/data-access/posts";
+import {GlobalStoreService}                    from "@tt/data-access/shared";
+import {Store} from "@ngrx/store";
 
 
 @Component({
@@ -34,8 +35,10 @@ export class PostFeedComponent {
 	r2 = inject(Renderer2)
 	private destroy$ = new Subject<void>()
 	profile = inject(GlobalStoreService).me
+	store = inject(Store)
 
-	feed: any[] = []
+	feed = this.store.selectSignal(selectPosts)
+	//ждём когда что то обновится в нашем хранилище что бы оттуда это взять
 
 	@Input() isCommentInput = false
 	@Input() postId: number = 0
@@ -57,15 +60,15 @@ export class PostFeedComponent {
 	//чтобы получить хост элемент на котором находится этот компонент, сам селектор компонента app-post-feed
 
 	//метод для загрузки постов
-	private loadPost() {
-		firstValueFrom(this.postService.fetchPosts())
-			.then((posts) => {
-				this.feed = posts //сохраняем и загружаем посты в feed
-			})
-			.catch((err) => {
-				console.error('Failed to load post', err)
-			})
-	}
+	// private loadPost() {
+	// 	firstValueFrom(this.postService.fetchPosts())
+	// 		.then((posts) => {
+	// 			this.feed = posts //сохраняем и загружаем посты в feed
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error('Failed to load post', err)
+	// 		})
+	// }
 
 	onCreatePost(postText: string) {
 		//принимаем текс поста передал то что вбито в textarea
@@ -73,18 +76,25 @@ export class PostFeedComponent {
 		if (!postText) return //ориентируемся на пост текст который пришел из инпута
 		//post text это текст поста, работаем с ним в пост инпут, принимаю его функции
 
-		firstValueFrom(
-			this.postService.createPost({
+		this.store.dispatch(postActions.postsCreate({
+			payload: {
 				title: 'Клёвый пост',
 				content: postText,
 				authorId: this.profile()!.id
-			})
-		)
-			//это простой промис так что можем сделать что то с результатом
-			.then(() => {
-				//после того как все произошло будем делать что пост равен пустой строке
-				postText = ''
-			})
+			}
+		}))
+		// firstValueFrom(
+		// 	this.postService.createPost({
+		// 		title: 'Клёвый пост',
+		// 		content: postText,
+		// 		authorId: this.profile()!.id
+		// 	})
+		// )
+		// 	//это простой промис так что можем сделать что то с результатом
+		// 	.then(() => {
+		// 		//после того как все произошло будем делать что пост равен пустой строке
+		// 		postText = ''
+		// 	})
 	}
 
 	trackByPostId(index: number, post: any): number {
@@ -93,7 +103,11 @@ export class PostFeedComponent {
 
 	//нужно прогреть наше состояние
 	constructor() {
-		this.loadPost()
+		//this.loadPost()
+	}
+
+	ngOnInit() {
+		this.store.dispatch(postActions.postsFetch())
 	}
 
 	ngAfterViewInit() {

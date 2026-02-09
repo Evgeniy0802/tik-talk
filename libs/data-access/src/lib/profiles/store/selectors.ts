@@ -1,5 +1,5 @@
 import {createSelector} from "@ngrx/store";
-import {profileFeature} from "@tt/data-access/profiles/store/reducer";
+import {profileFeature} from "../../profiles";
 
 export const selectFilteredProfiles = createSelector(
     //будет брать все профили в selectProfiles
