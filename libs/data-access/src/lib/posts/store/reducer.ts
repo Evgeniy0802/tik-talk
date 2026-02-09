@@ -1,5 +1,5 @@
-import {CommentCreateDto, Post, postActions, PostComment} from '../../posts';
-import {createFeature, createReducer, on}                 from "@ngrx/store";
+import {Post, postActions, PostComment} from '../../posts';
+import {createFeature, createReducer, on} from "@ngrx/store";
 
 //интерфейс стора
 export interface PostsState {
@@ -7,7 +7,7 @@ export interface PostsState {
     comments: Record<number, PostComment[]>,
 }
 //начальное значение
-export const initialState: PostsState = {
+export const initialStatePost: PostsState = {
     posts: [],
     comments: {}
 }
@@ -15,7 +15,7 @@ export const initialState: PostsState = {
 export const postsFeature = createFeature({
     name: 'postsFeature',
     reducer: createReducer(
-        initialState,
+        initialStatePost,
         //в метод on передаём экшн, который слушает редьюсер, начальное значение state и то что будем класть в state
         on(postActions.postsLoaded, (state, payload) => {
             //state паспаковываем и обновляем, кладём туда значение и посты

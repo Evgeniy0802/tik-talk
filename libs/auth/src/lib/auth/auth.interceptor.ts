@@ -3,7 +3,6 @@ import {
 	HttpInterceptorFn,
 	HttpRequest
 } from '@angular/common/http'
-import { AuthService } from './auth.service'
 import { inject } from '@angular/core'
 import {
 	BehaviorSubject,
@@ -13,6 +12,7 @@ import {
 	tap,
 	throwError
 } from 'rxjs'
+import {AuthService} from "@tt/data-access/auth";
 
 let isRefreshing$ = new BehaviorSubject<boolean>(false)
 //некий гибрид между стримом и сигналом мы можем подписаться на него и без подписки в любой момент времени получить значение
