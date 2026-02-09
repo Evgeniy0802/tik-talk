@@ -42,4 +42,32 @@ export class PostEffects {
             )
         )
     })
+
+    //загружаем комменты
+    fetchComments = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(postActions.commentsFetch),
+            switchMap(({ postId }) => {
+                return this.postService.getCommentByPostId(postId) //функ из сервиса для получения коммента по постайди
+            }),
+            map(comments => postActions.commentsLoaded({comments: comments}))
+        )
+    })
+
+    //создаём комменты
+    createComments = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(postActions.commentsCreate),
+            switchMap(({ payload }) =>
+              this.postService.createComment({
+                  text: payload.text,
+                  authorId: payload.authorId,
+                  postId: payload.postId,
+              })
+                .pipe(
+                    map(() => postActions.commentsFetch({postId: payload.postId}))
+                )
+            )
+        )
+    })
 }

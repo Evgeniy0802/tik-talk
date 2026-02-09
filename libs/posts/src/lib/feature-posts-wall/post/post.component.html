@@ -16,14 +16,14 @@
 		<div class="post-counters">
 			<span class="comments-amount">
 				<svg icon="comments" class="svg16"></svg>
-				<span class="comments-length">{{ comments().length }}</span>
+				<span class="comments-length">{{ comments2()?.length ?? 0 }}</span>
 			</span>
 		</div>
 
 		<svg icon="points-posts" class="points-svg"></svg>
 
 		<div class="pots__comments-wrapper">
-			@for (comment of comments(); track comment.id) {
+			@for (comment of comments2(); track comment.id) {
 				<app-comment [comment]="comment"></app-comment>
 			}
 		</div>
