@@ -13,7 +13,7 @@ export class ProfileService {
 	baseApiUrl = 'https://icherniakov.ru/yt-course/'
 
 	me = signal<Profile | null>(null)
-	filteredProfiles = signal<Profile[]>([])
+	//filteredProfiles = signal<Profile[]>([])
 
 	getTestAccounts() {
 		return this.http.get<Profile[]>(`${this.baseApiUrl}account/test_accounts`)
@@ -64,6 +64,6 @@ export class ProfileService {
 		//Record<string, any> означает объекты типа ключ-значение
 		return this.http
 			.get<Pageable<Profile>>(`${this.baseApiUrl}account/accounts`, { params })
-			.pipe(tap((res) => this.filteredProfiles.set(res.items)))
+			//.pipe(tap((res) => this.filteredProfiles.set(res.items)))
 	}
 }

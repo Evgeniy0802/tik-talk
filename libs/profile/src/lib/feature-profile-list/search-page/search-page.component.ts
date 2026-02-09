@@ -1,18 +1,19 @@
 import { Component, inject } from '@angular/core'
 import { ProfileCardComponent } from '../../ui'
 import { ProfileFiltersComponent } from '../../feature-profile-list'
-import { AsyncPipe } from '@angular/common'
-import {ProfileService} from "@tt/data-access/profiles";
+import {Store} from "@ngrx/store";
+import {selectFilteredProfiles} from "@tt/data-access/profiles";
 
 @Component({
 	selector: 'app-search-page',
-	imports: [ProfileCardComponent, ProfileFiltersComponent, AsyncPipe],
+	imports: [ProfileCardComponent, ProfileFiltersComponent],
 	templateUrl: './search-page.component.html',
 	styleUrl: './search-page.component.scss'
 })
 export class SearchPageComponent {
-	profileService = inject(ProfileService)
-	profiles = this.profileService.filteredProfiles
+	store = inject(Store)
+	profiles = this.store.selectSignal(selectFilteredProfiles) //это для сигнала
+    //profiles = this.store.select(selectFilteredProfiles) старый способ с Obseravble
 	//profiles: Profile[] = [] //массив наших профилей, делаем тип данных Profile[], которые создали в интерфейсах и передали в сервисе(getTestAccounts) тип данных
 
 	//constructor() {

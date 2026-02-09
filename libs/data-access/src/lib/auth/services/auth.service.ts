@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { catchError, tap, throwError } from 'rxjs'
-import { TokenResponse } from './auth.interface'
+import { TokenResponse } from '../interfaces/auth.interface'
 import { CookieService } from 'ngx-cookie-service'
 import { Router } from '@angular/router'
 

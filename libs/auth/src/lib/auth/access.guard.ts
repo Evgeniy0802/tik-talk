@@ -1,6 +1,6 @@
-import { AuthService } from './auth.service'
 import { inject } from '@angular/core'
 import { Router } from '@angular/router'
+import {AuthService} from "@tt/data-access/auth";
 
 export const canActivateAuth = () => {
 	const isLoggedIn = inject(AuthService).isAuth //запрашиваем сервис прямо в методе
