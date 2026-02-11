@@ -4,7 +4,9 @@
 			<img
 				[src]="profile.avatarUrl | imgUrl"
 				[alt]="profile"
-				class="profile-card__avatar" />
+				class="profile-card__avatar"
+                (click)="routePage(profile.id)"
+            />
 			<div class="profile-card__name">
 				<strong class="h6"
 					>{{ profile.firstName }} {{ profile.lastName }}</strong
@@ -24,10 +26,18 @@
 		</div>
 
 		<div class="profile-card__action-btns">
-			<button class="btn btn-sub">
+			<button class="btns-card btn btn-sub">
 				<span>Подписаться</span>
 				<svg icon="communities" class="svg16"></svg>
 			</button>
+
+            <button
+                    (click)="inSendMessage(profile.id)"
+                    class="btns-card btn btn-sub"
+            >
+                <span>Написать</span>
+                <svg icon="send-message" class="svg16"></svg>
+            </button>
 		</div>
 	</div>
 }

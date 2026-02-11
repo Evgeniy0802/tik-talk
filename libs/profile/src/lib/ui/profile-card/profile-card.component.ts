@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core'
+import {Component, inject, Input} from '@angular/core'
 import {ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
 import {Profile} from "@tt/data-access/profiles";
+import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-profile-card',
@@ -9,5 +10,15 @@ import {Profile} from "@tt/data-access/profiles";
 	styleUrl: './profile-card.component.scss'
 })
 export class ProfileCardComponent {
+	route = inject (Router)
+
 	@Input() profile!: Profile
+
+	async inSendMessage(userId: number) {
+		this.route.navigate(['/chats', 'new'], {queryParams: {userId}})
+	}
+
+	async routePage(userId: number) {
+		this.route.navigate(['/profile/', userId])
+	}
 }
