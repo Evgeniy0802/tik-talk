@@ -5,9 +5,9 @@ import {ProfileService} from '../../profiles';
 import { Message, Chat, LastMessageRes } from "../../chats";
 import { ChatWsService } from "../interfaces/chat-ws-service.interface";
 import {AuthService} from "../../auth";
-import {ChatWsMessage} from "../interfaces/chat-ws-message.interface";
-import {isNewMessage, isUnreadMessage} from "../interfaces/type-guards";
-import {ChatWsRxjsService} from "../interfaces/chat-ws-rxjs.service";
+import {ChatWsMessage}                               from "../interfaces/chat-ws-message.interface";
+import {isErrMessage, isNewMessage, isUnreadMessage} from "../interfaces/type-guards";
+import {ChatWsRxjsService}                           from "../interfaces/chat-ws-rxjs.service";
 
 
 @Injectable({
@@ -17,6 +17,7 @@ export class ChatsService {
 	#authService = inject(AuthService);
 	http = inject(HttpClient)
 	me = inject(ProfileService).me
+	unreadMessageAmount = signal(0)
 
 	//сделали поле wsAdapter в котором будет класс который будет отвечать за всю логику связанную с chat.ws.service
 	wsAdapter: ChatWsService = new ChatWsRxjsService()
@@ -40,8 +41,12 @@ export class ChatsService {
 	handleWsMessage = (message: ChatWsMessage) => { //новое сообщеие упало сюда, стрелочная функция контекст там где её создали
 		if (!('action' in message)) return
 
-		if(isUnreadMessage(message)) {
-			// TODO
+		if (isUnreadMessage(message)) {
+			this.unreadMessageAmount.set(message.data.count)
+		}
+
+		if (isErrMessage(message)) {
+			console.log('Токен протух')
 		}
 
 

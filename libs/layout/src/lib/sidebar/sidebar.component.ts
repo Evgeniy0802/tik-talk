@@ -5,6 +5,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router'
 import { firstValueFrom } from 'rxjs'
 import {ClickDirective, ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
 import {ProfileService} from "@tt/data-access/profiles";
+import {ChatsService} from "@tt/data-access/chats";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
 	selector: 'app-sidebar',
@@ -22,12 +24,19 @@ import {ProfileService} from "@tt/data-access/profiles";
 })
 export class SidebarComponent {
 	profileService = inject(ProfileService)
-
 	me = this.profileService.me
+	#chatService = inject(ChatsService)
+	unreadMessageAmount = this.#chatService.unreadMessageAmount
 
 	// Переменная для управления видимостью кнопки "Выход"
 	fileLogout: boolean = false
 	photoSide: boolean = false
+
+	constructor() {
+		this.#chatService.connectWs()
+			.pipe(takeUntilDestroyed())
+			.subscribe()
+	}
 
 	subscribers$ = this.profileService.getSubscribersShortList()
 	//если стрим значит нужен знак $

@@ -44,7 +44,7 @@ export class ChatWorkspaceMessagesWrapperComponent {
 		// 	this.chatsService.sendMessage(this.chat().id, messageText)
 		// )
 		//отправил сообщение
-		await firstValueFrom(this.chatsService.getChatById(this.chat().id))
+		//await firstValueFrom(this.chatsService.getChatById(this.chat().id))
 		//полуил все сообщения чтобы все новое отрендерилось
 	}
 

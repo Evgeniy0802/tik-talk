@@ -12,7 +12,7 @@ import {LastMessageRes} from "@tt/data-access/chats";
 export class ChatsBtnComponent {
     chat = input<LastMessageRes>()
 
-    async ngOnInit() {
-        this.chat()!.unreadMessages
-    }
+    // async ngOnInit() {
+    //     this.chat()!.unreadMessages
+    // }
 }

@@ -13,13 +13,13 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 export class ChatsPageComponent {
 	#chatService = inject(ChatsService);
 
-	constructor() {
-		this.#chatService.connectWs()
-			.pipe(
-				takeUntilDestroyed()
-			)
-			.subscribe()
-	}
+	// constructor() {
+	// 	this.#chatService.connectWs()
+	// 		.pipe(
+	// 			takeUntilDestroyed()
+	// 		)
+	// 		.subscribe()
+	// }
 	// ngOnInit() {
 	// 	//приконектимся к веб сокету
 	// 	this.#chatService.connectWs().subscribe()
