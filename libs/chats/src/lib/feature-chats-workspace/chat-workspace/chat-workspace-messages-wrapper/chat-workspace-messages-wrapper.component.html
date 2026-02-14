@@ -1,5 +1,5 @@
 <div #messageContainer class="messages-wrapper">
-	@for (group of getGroupMessages(); track group.values) {
+	@for (group of messages(); track group.values) {
 		<div class="date-group">
 			<span class="group-message">{{ group[0] }}</span>
 		</div>

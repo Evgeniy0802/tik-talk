@@ -15,7 +15,7 @@ export interface Message {
 	userFromId: number
 	personalChatId: number
 	createdAt: string
-	updatedAt: string
+	updatedAt?: string
 	isRead: boolean
 	user?: Profile
 	isMine?: boolean

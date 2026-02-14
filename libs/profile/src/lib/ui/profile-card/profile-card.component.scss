@@ -42,6 +42,20 @@
 	height: min-content;
 }
 
+.profile-card__action-btns {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	justify-content: center;
+	width: 184px;
+}
+
+.btns-card {
+	height: 40px;
+	width: 100%;
+	background: var(--primary-color);
+}
+
 .btn-sub {
 	display: flex;
 	gap: 8px;

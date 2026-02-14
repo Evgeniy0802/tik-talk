@@ -19,6 +19,10 @@
 					routerLinkActive="active">
 					<svg [icon]="menuItem.icon"></svg>
 					<span>{{ menuItem.label }}</span>
+
+                    @if (menuItem.label === 'Чаты' && unreadMessageAmount() > 0) {
+                        <div class="unread-mess">{{ unreadMessageAmount() }}</div>
+                    }
 				</a>
 			</li>
 		}

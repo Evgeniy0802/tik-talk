@@ -36,20 +36,4 @@ export class CommunitiesPageComponent {
 	subscribersAng$ = this.profileService.getSubscribersShortList(4)
 	subscriberSaint$ = this.profileService.getSubscribersShortList(1)
 	subscriberLyceum$ = this.profileService.getSubscribersShortList(4)
-
-	ngAfterViewInit() {
-		this.resizeFeedComm()
-
-		fromEvent(window, 'resize')
-			.pipe(debounceTime(300), takeUntil(this.destroy$))
-			.subscribe(() => {
-				console.log(123)
-			})
-	}
-
-	resizeFeedComm() {
-		const { top } = this.hostElement.nativeElement.getBoundingClientRect()
-		const height = window.innerHeight - top - 24
-		this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`)
-	}
 }

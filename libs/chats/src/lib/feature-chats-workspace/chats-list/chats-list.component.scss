@@ -1,6 +1,11 @@
 :host {
 	border-right: var(--light-border);
 	display: block;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .chats-filters-input-wrapper {
