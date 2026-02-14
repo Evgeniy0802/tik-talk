@@ -20,7 +20,7 @@ let isRefreshing$ = new BehaviorSubject<boolean>(false)
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
 
 	// Если запрос УЖЕ идет на рефреш, не пускаем его в логику повторных попыток
-	if (req.url.includes('auth/refresh')) return next(req);
+	//if (req.url.includes('auth/refresh')) return next(req);
 
 
 	//next функция что-бы отпустить его, а req это перехваченный реквест
