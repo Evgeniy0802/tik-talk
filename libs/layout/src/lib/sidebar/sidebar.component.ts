@@ -1,12 +1,14 @@
-import { Component, inject } from '@angular/core'
-import { AsyncPipe } from '@angular/common'
+import {Component, DestroyRef, inject, OnInit} from '@angular/core'
+import { AsyncPipe }                           from '@angular/common'
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component'
 import { RouterLink, RouterLinkActive } from '@angular/router'
-import { firstValueFrom } from 'rxjs'
+import {firstValueFrom, Subscription, timer} from 'rxjs'
 import {ClickDirective, ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
 import {ProfileService} from "@tt/data-access/profiles";
 import {ChatsService} from "@tt/data-access/chats";
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {isErrMessage} from "@tt/data-access/chats/interfaces/type-guards";
+import {AuthService} from "@tt/data-access/auth";
 
 @Component({
 	selector: 'app-sidebar',
@@ -22,21 +24,50 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 	templateUrl: './sidebar.component.html',
 	styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 	profileService = inject(ProfileService)
+	authService = inject(AuthService)
 	me = this.profileService.me
 	#chatService = inject(ChatsService)
 	unreadMessageAmount = this.#chatService.unreadMessageAmount
+	destroyRef = inject(DestroyRef)
+
+	wsSubscribe!: Subscription //мы можем положить любую подписку внутрь переменной и в этой переменной можно отписаться
 
 	// Переменная для управления видимостью кнопки "Выход"
 	fileLogout: boolean = false
 	photoSide: boolean = false
 
-	constructor() {
-		this.#chatService.connectWs()
-			.pipe(takeUntilDestroyed())
-			.subscribe()
+	 async reconnect() {
+		console.log('Reconnecting...')
+		await firstValueFrom(this.authService.refreshAuthToken()) //жду рефреша
+		 await firstValueFrom(timer(2000))//ждём когда обновится
+		 this.connectWsSide()//конекчу ws
 	}
+
+	connectWsSide(): void {
+		this.wsSubscribe?.unsubscribe()
+		this.wsSubscribe = this.#chatService
+			.connectWs()
+			.pipe(takeUntilDestroyed(this.destroyRef))
+			.subscribe((message) => {
+				if (isErrMessage(message)) {
+					console.log('Неверный токен')
+					this.reconnect()
+				}
+			})
+	}
+
+	ngOnInit() {
+		firstValueFrom(this.profileService.getMe())
+		this.connectWsSide()
+	}
+
+	// constructor() {
+	// 	this.#chatService.connectWs()
+	// 		.pipe(takeUntilDestroyed())
+	// 		.subscribe()
+	// }
 
 	subscribers$ = this.profileService.getSubscribersShortList()
 	//если стрим значит нужен знак $
@@ -64,10 +95,10 @@ export class SidebarComponent {
 		}
 	]
 
-	//получаем себя
-	ngOnInit() {
-		firstValueFrom(this.profileService.getMe())
-	}
+	// //получаем себя
+	// ngOnInit() {
+	// 	firstValueFrom(this.profileService.getMe())
+	// }
 
 	// Метод, который будет вызываться директивой для обновления состояния
 	onSowStatus(value: boolean) {

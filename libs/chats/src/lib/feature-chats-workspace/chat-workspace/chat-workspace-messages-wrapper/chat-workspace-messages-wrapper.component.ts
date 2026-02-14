@@ -33,7 +33,7 @@ export class ChatWorkspaceMessagesWrapperComponent {
 
 	chat = input.required<Chat>() //здесь накапливаем
 
-	messages = this.chatsService.activeChatMessages
+	messages = this.chatsService.groupedActiveChatMessages
 
 	async onSendMessage(messageText: string) {
 		this.chatsService.wsAdapter.sendMessage(
@@ -97,46 +97,46 @@ export class ChatWorkspaceMessagesWrapperComponent {
 		// срабатывает каждый раз, когда Angular завершает проверку представлений компонента. Это гарантирует, что прокрутка произойдет после того как все новые данные (соощения) будут добавлены в DOM и изменят высоту контейнера.
 	}
 
-	getGroupMessages() {
-		const messagesArray = this.messages()
-		const saveGroupMessages = new Map<string, Message[]>() // Инициализация Map для хранения сгруппированных сообщений.
-		//Map можно представить как словарь или книгу контактов вы ищете что-то по ключу имени и получаете значение номер телефона.
-
-		//Определение дат сегодня и Вчера с помощью luxon
-		//startOf('day') обнуляет время  для корректного сравнения
-		const today = DateTime.now().startOf('day') //исходим от 00
-		const yesterday = today.minus({ days: 1 })
-
-		// Перебор всех сообщений в исходном массиве
-		messagesArray.forEach((message: Message) => {
-			// Преобразование строки даты сообщения в объект DateTime
-			const messageDate = DateTime.fromISO(message.createdAt, { zone: 'utc' }) //нулевая зона, обнуляем время
-				.setZone(DateTime.local().zone) //берет время сообщения которое пришло с сервера в UTC и пересчитывает его под часовой пояс твоего компьютера
-				.startOf('day') //округлить дату, до начала определенного периода
-
-			// Определение метки для текущей даты сообщения
-			let dateLabel: string
-			if (messageDate.equals(today)) {
-				//messageDate обнулил до начала дня, today тоже так же.
-				dateLabel = 'Сегодня' //equals() если месяц и день и год у них совпали, значит отправленно сегодня
-			} else if (messageDate.equals(yesterday)) {
-				dateLabel = 'Вчера'
-			} else {
-				// Для остальных дней форматируем дату в формат 'dd.MM.yyyy' с помощью toFormat
-				dateLabel = messageDate.toFormat('DD')
-			}
-
-			// Добавление сообщения в соответствующую группу
-			if (saveGroupMessages.has(dateLabel)) {
-				//has  просто проверяет, существует ли уже запись (ключ) с таким именем
-				// Если группа уже существует, добавляем сообщение в неё
-				saveGroupMessages.get(dateLabel)!.push(message) //get используется для того, чтобы достать само значение, связанное с ключом, который вы указали.
-			} else {
-				// Если группа не существует, создаём её с текущим сообщением
-				saveGroupMessages.set(dateLabel, [message])
-			}
-		})
-
-		return Array.from(saveGroupMessages.entries()) //возвращаем массив пар дата сообщения
-	}
+	// getGroupMessages() {
+	// 	const messagesArray = this.messages()
+	// 	const saveGroupMessages = new Map<string, Message[]>() // Инициализация Map для хранения сгруппированных сообщений.
+	// 	//Map можно представить как словарь или книгу контактов вы ищете что-то по ключу имени и получаете значение номер телефона.
+	//
+	// 	//Определение дат сегодня и Вчера с помощью luxon
+	// 	//startOf('day') обнуляет время  для корректного сравнения
+	// 	const today = DateTime.now().startOf('day') //исходим от 00
+	// 	const yesterday = today.minus({ days: 1 })
+	//
+	// 	// Перебор всех сообщений в исходном массиве
+	// 	messagesArray.forEach((message: Message) => {
+	// 		// Преобразование строки даты сообщения в объект DateTime
+	// 		const messageDate = DateTime.fromISO(message.createdAt, { zone: 'utc' }) //нулевая зона, обнуляем время
+	// 			.setZone(DateTime.local().zone) //берет время сообщения которое пришло с сервера в UTC и пересчитывает его под часовой пояс твоего компьютера
+	// 			.startOf('day') //округлить дату, до начала определенного периода
+	//
+	// 		// Определение метки для текущей даты сообщения
+	// 		let dateLabel: string
+	// 		if (messageDate.equals(today)) {
+	// 			//messageDate обнулил до начала дня, today тоже так же.
+	// 			dateLabel = 'Сегодня' //equals() если месяц и день и год у них совпали, значит отправленно сегодня
+	// 		} else if (messageDate.equals(yesterday)) {
+	// 			dateLabel = 'Вчера'
+	// 		} else {
+	// 			// Для остальных дней форматируем дату в формат 'dd.MM.yyyy' с помощью toFormat
+	// 			dateLabel = messageDate.toFormat('DD')
+	// 		}
+	//
+	// 		// Добавление сообщения в соответствующую группу
+	// 		if (saveGroupMessages.has(dateLabel)) {
+	// 			//has  просто проверяет, существует ли уже запись (ключ) с таким именем
+	// 			// Если группа уже существует, добавляем сообщение в неё
+	// 			saveGroupMessages.get(dateLabel)!.push(message) //get используется для того, чтобы достать само значение, связанное с ключом, который вы указали.
+	// 		} else {
+	// 			// Если группа не существует, создаём её с текущим сообщением
+	// 			saveGroupMessages.set(dateLabel, [message])
+	// 		}
+	// 	})
+	//
+	// 	return Array.from(saveGroupMessages.entries()) //возвращаем массив пар дата сообщения
+	// }
 }

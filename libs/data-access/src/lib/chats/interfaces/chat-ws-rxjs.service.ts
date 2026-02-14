@@ -15,7 +15,7 @@ export class ChatWsRxjsService implements ChatWsService{
             })
         }
 
-        return this.#socket.asObservable()
+        return this.#socket
             .pipe(
                 tap(message => params.handleMessage(message)),
                 finalize(() => console.log('Кино закончилось')) //что делать на конце

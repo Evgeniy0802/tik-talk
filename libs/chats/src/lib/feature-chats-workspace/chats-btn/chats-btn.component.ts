@@ -1,7 +1,8 @@
-import {Component, input} from '@angular/core'
+import {Component, inject, input} from '@angular/core'
 import {DatePipe} from '@angular/common'
 import {AvatarCircleComponent} from "@tt/common-ui";
-import {LastMessageRes} from "@tt/data-access/chats";
+import {ChatsService, LastMessageRes} from "@tt/data-access/chats";
+
 
 @Component({
     selector: 'button[chats]', //будет такой компонент если chats будет там

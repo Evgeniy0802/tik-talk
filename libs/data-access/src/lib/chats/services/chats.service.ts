@@ -5,9 +5,11 @@ import {ProfileService} from '../../profiles';
 import { Message, Chat, LastMessageRes } from "../../chats";
 import { ChatWsService } from "../interfaces/chat-ws-service.interface";
 import {AuthService} from "../../auth";
-import {ChatWsMessage}                               from "../interfaces/chat-ws-message.interface";
-import {isErrMessage, isNewMessage, isUnreadMessage} from "../interfaces/type-guards";
-import {ChatWsRxjsService}                           from "../interfaces/chat-ws-rxjs.service";
+import {ChatWsMessage} from "../interfaces/chat-ws-message.interface";
+import {isNewMessage, isUnreadMessage} from "../interfaces/type-guards";
+import {ChatWsRxjsService} from "../interfaces/chat-ws-rxjs.service";
+import {DateTime} from "luxon";
+
 
 
 @Injectable({
@@ -22,7 +24,8 @@ export class ChatsService {
 	//сделали поле wsAdapter в котором будет класс который будет отвечать за всю логику связанную с chat.ws.service
 	wsAdapter: ChatWsService = new ChatWsRxjsService()
 
-	activeChatMessages = signal<Message[]>([])
+	//activeChatMessages = signal<Message[]>([])
+	groupedActiveChatMessages = signal<[string, Message[]][]>([])
 
 	baseApiUrl = 'https://icherniakov.ru/yt-course/'
 	chatUrl = `${this.baseApiUrl}chat/`
@@ -45,26 +48,44 @@ export class ChatsService {
 			this.unreadMessageAmount.set(message.data.count)
 		}
 
-		if (isErrMessage(message)) {
-			console.log('Токен протух')
-		}
+		// if (isErrMessage(message)) {
+		// 	console.log('Токен протух')
+		// }
 
 
 		//if (message.action === 'message') {
 			//добавялем это сообщение в activeChatMessages
 		if (isNewMessage(message)) {
-			this.activeChatMessages.set([
-				...this.activeChatMessages(), //расскалдываем на настоящие сообщения, сообщения имеют другие поля, мапим
-				{
-					id: message.data.id,
-					userFromId: message.data.author,
-					personalChatId: message.data.chat_id,
-					text: message.data.message,
-					createdAt: message.data.created_at,
-					isRead: false,
-					isMine: false
-				}
-		])
+			// this.activeChatMessages.set([
+			// 	...this.activeChatMessages(), //расскалдываем на настоящие сообщения, сообщения имеют другие поля, мапим
+			const isMine = message.data.author === this.me()?.id;
+			const newMessages = {
+				author: message.data.author,
+				id: message.data.id,
+				userFromId: message.data.author,
+				personalChatId: message.data.chat_id,
+				text: message.data.message,
+				createdAt: message.data.created_at.replace('_', 'T') + 'Z',
+				isRead: false,
+				isMine: isMine,
+				user: isMine ? this.me()! : ({} as any)
+			}
+
+		//])
+			//получаем текущие сообщения
+			const curMessage = this.groupedActiveChatMessages()
+
+			//ищем сегоднюшню дату
+			const todayDate = curMessage.find(([time]) => time === 'Сегодня')
+
+			if (todayDate) {
+				todayDate[1].push(newMessages) //добавляем сообщение в Сегодня
+			} else {
+				curMessage.push(['Сегодня', [newMessages]]) //создаём группу для Сегодня с новыми сообщениями
+			}
+
+			//обновляем сигнал с новыми данными
+			this.groupedActiveChatMessages.set([...curMessage])
 		}
 	}
 
@@ -91,11 +112,13 @@ export class ChatsService {
 									chat.userFirst.id === message.userFromId
 										? chat.userFirst
 										: chat.userSecond,
-								isMine: message.userFromId === this.me()!.id
+								isMine: message.userFromId === this.me()?.id
 							}
 						})
 
-						this.activeChatMessages.set(patchMessages)
+						//группируем запатченные сообщения
+						const groupedMessages = this.getGroupMessages(patchMessages)
+						this.groupedActiveChatMessages.set(groupedMessages)
 						//хотим получить чать по id, но мы на лету его mapим и превращаем в объект который нам интересен
 						//добавляем в ответ два новых поля и в него закинули patchMessages
 
@@ -112,6 +135,35 @@ export class ChatsService {
 					})
 				)
 		)
+	}
+
+	getGroupMessages(message: Message[]) {
+		const groupTimeMessages = new Map<string, Message[]>()
+
+		const today = DateTime.now().startOf('day')
+		const yesterday = today.minus({ days: 1 })
+
+		message.forEach((message) => {
+			const messageDate = DateTime.fromISO(message.createdAt, {zone: 'utc'})
+				.setZone(DateTime.local().zone)
+				.startOf('day')
+
+			let dateLabel: string
+			if (messageDate.equals(today)) {
+				dateLabel = 'Сегодня'
+			} else if (messageDate.equals(yesterday)) {
+				dateLabel = 'Вчера'
+			} else {
+				dateLabel = messageDate.toFormat('MM.dd.yyyy')
+			}
+
+			if (!groupTimeMessages.has(dateLabel)) {
+				groupTimeMessages.set(dateLabel, [])
+			}
+			groupTimeMessages.get(dateLabel)?.push(message)
+		})
+
+		return Array.from(groupTimeMessages.entries())
 	}
 
 	sendMessage(chatId: number, message: string) {
