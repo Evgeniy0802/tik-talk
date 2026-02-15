@@ -1,13 +1,12 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
-	ElementRef,
 	inject,
 	Renderer2
 } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AsyncPipe } from '@angular/common'
 import { RouterLink } from '@angular/router'
-import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs'
 import {ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
 import {ProfileService} from "@tt/data-access/profiles";
 
@@ -22,13 +21,13 @@ import {ProfileService} from "@tt/data-access/profiles";
 		RouterLink
 	],
 	templateUrl: './communities-page.component.html',
-	styleUrl: './communities-page.component.scss'
+	styleUrl: './communities-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommunitiesPageComponent {
 	profileService = inject(ProfileService)
-	hostElement = inject(ElementRef)
 	r2 = inject(Renderer2)
-	private destroy$ = new Subject<void>()
+
 
 	subscribersIvan$ = this.profileService.getSubscribersShortList(5)
 	subscribersApl$ = this.profileService.getSubscribersShortList(4)

@@ -1,5 +1,5 @@
-import {Component, computed, inject, input, OnInit, Signal} from '@angular/core'
-import {CommentComponent, PostInputComponent}               from "../../ui";
+import {ChangeDetectionStrategy, Component, computed, inject, input, OnInit, Signal} from '@angular/core'
+import {CommentComponent, PostInputComponent} from "../../ui";
 import {AvatarCircleComponent, DateTimePipe, SvgIconComponent} from "@tt/common-ui";
 import {Post, postActions, PostComment, PostService, selectComments} from "@tt/data-access/posts";
 import {GlobalStoreService} from "@tt/data-access/shared";
@@ -15,7 +15,8 @@ import {Store} from "@ngrx/store";
         DateTimePipe
     ],
     templateUrl: './post.component.html',
-    styleUrl: './post.component.scss'
+    styleUrl: './post.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {
     post = input<Post>()

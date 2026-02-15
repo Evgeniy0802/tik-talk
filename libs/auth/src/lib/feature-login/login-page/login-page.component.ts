@@ -1,4 +1,4 @@
- import { Component, inject, signal } from '@angular/core'
+ import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core'
 import {
 	FormControl,
 	FormGroup,
@@ -13,7 +13,8 @@ import {SvgIconComponent} from "@tt/common-ui";
 	selector: 'app-login-page',
 	imports: [ReactiveFormsModule, SvgIconComponent],
 	templateUrl: './login-page.component.html',
-	styleUrl: './login-page.component.scss'
+	styleUrl: './login-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent {
 	authService = inject(AuthService)

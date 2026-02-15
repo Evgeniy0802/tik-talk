@@ -1,5 +1,5 @@
-import { Component, effect, inject, ViewChild } from '@angular/core'
-import {AvatarUploadComponent, ProfileHeaderComponent} from '../../ui'
+import {ChangeDetectionStrategy, Component, effect, inject, ViewChild} from '@angular/core'
+import {AvatarUploadComponent, ProfileHeaderComponent}                  from '../../ui'
 import {
 	FormBuilder,
 	ReactiveFormsModule,
@@ -23,7 +23,8 @@ import {ProfileService} from "@tt/data-access/profiles";
 		AsyncPipe
 	],
 	templateUrl: './settings-page.component.html',
-	styleUrl: './settings-page.component.scss'
+	styleUrl: './settings-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsPageComponent {
 	fb = inject(FormBuilder)
