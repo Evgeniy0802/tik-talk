@@ -1,22 +1,20 @@
 import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import {map, Observable} from 'rxjs'
-import {ProfileService} from '../../profiles';
-import { Message, Chat, LastMessageRes } from "../../chats";
-import { ChatWsService } from "../interfaces/chat-ws-service.interface";
-import {AuthService} from "../../auth";
-import {ChatWsMessage} from "../interfaces/chat-ws-message.interface";
-import {isNewMessage, isUnreadMessage} from "../interfaces/type-guards";
-import {ChatWsRxjsService} from "../interfaces/chat-ws-rxjs.service";
-import {DateTime} from "luxon";
-
-
+import { map, Observable } from 'rxjs'
+import { ProfileService } from '../../profiles'
+import { Message, Chat, LastMessageRes } from '../../chats'
+import { ChatWsService } from '../interfaces/chat-ws-service.interface'
+import { AuthService } from '../../auth'
+import { ChatWsMessage } from '../interfaces/chat-ws-message.interface'
+import { isNewMessage, isUnreadMessage } from '../interfaces/type-guards'
+import { ChatWsRxjsService } from '../interfaces/chat-ws-rxjs.service'
+import { DateTime } from 'luxon'
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ChatsService {
-	#authService = inject(AuthService);
+	#authService = inject(AuthService)
 	http = inject(HttpClient)
 	me = inject(ProfileService).me
 	unreadMessageAmount = signal(0)
@@ -26,8 +24,9 @@ export class ChatsService {
 
 	//activeChatMessages = signal<Message[]>([])
 	groupedActiveChatMessages = signal<[string, Message[]][]>([])
+	activeChat = signal<Chat | null>(null)
 
-	baseApiUrl = 'https://icherniakov.ru/yt-course/'
+	baseApiUrl = '/yt-course/'
 	chatUrl = `${this.baseApiUrl}chat/`
 	messageUrl = `${this.baseApiUrl}message/`
 
@@ -41,7 +40,8 @@ export class ChatsService {
 	}
 
 	//TODO ЗАМЫКАНИЕ
-	handleWsMessage = (message: ChatWsMessage) => { //новое сообщеие упало сюда, стрелочная функция контекст там где её создали
+	handleWsMessage = (message: ChatWsMessage) => {
+		//новое сообщеие упало сюда, стрелочная функция контекст там где её создали
 		if (!('action' in message)) return
 
 		if (isUnreadMessage(message)) {
@@ -52,26 +52,32 @@ export class ChatsService {
 		// 	console.log('Токен протух')
 		// }
 
-
 		//if (message.action === 'message') {
-			//добавялем это сообщение в activeChatMessages
+		//добавялем это сообщение в activeChatMessages
 		if (isNewMessage(message)) {
 			// this.activeChatMessages.set([
 			// 	...this.activeChatMessages(), //расскалдываем на настоящие сообщения, сообщения имеют другие поля, мапим
-			const isMine = message.data.author === this.me()?.id;
+			const me = this.me()
+			const activeChat = this.activeChat()
+			if (!me || !activeChat) return
 			const newMessages = {
 				author: message.data.author,
 				id: message.data.id,
 				userFromId: message.data.author,
 				personalChatId: message.data.chat_id,
 				text: message.data.message,
-				createdAt: message.data.created_at.replace('_', 'T') + 'Z',
+				createdAt: message.data.created_at.replace(' ', 'T') + 'Z',
 				isRead: false,
-				isMine: isMine,
-				user: isMine ? this.me()! : ({} as any)
+				isMine: message.data.author === me.id,
+				user:
+					activeChat.userFirst.id === message.data.author
+						? activeChat.userFirst
+						: activeChat.userSecond
 			}
 
-		//])
+			console.log('ИТОГОВАЯ СТРОКА:', newMessages.createdAt)
+
+			//])
 			//получаем текущие сообщения
 			const curMessage = this.groupedActiveChatMessages()
 
@@ -104,6 +110,7 @@ export class ChatsService {
 				//узнаём кто есть мы
 				.pipe(
 					map((chat) => {
+						this.activeChat.set(chat)
 						const patchMessages = chat.messages.map((message) => {
 							return {
 								//записываем измененный массив massage
@@ -144,7 +151,7 @@ export class ChatsService {
 		const yesterday = today.minus({ days: 1 })
 
 		message.forEach((message) => {
-			const messageDate = DateTime.fromISO(message.createdAt, {zone: 'utc'})
+			const messageDate = DateTime.fromISO(message.createdAt, { zone: 'utc' })
 				.setZone(DateTime.local().zone)
 				.startOf('day')
 

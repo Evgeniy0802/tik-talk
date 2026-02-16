@@ -6,7 +6,7 @@
 	<div class="message-container">
 		<strong class="medium-text mb8 inline"
 			>{{ message.user?.firstName }} {{ message.user?.lastName }}
-			{{ message.createdAt | date: 'HH:mm' : 'UTC+0600' }}</strong
+			{{ formatTime(message.createdAt, 'ru') }}</strong
 		>
 		<div class="message-text">
 			{{ message.text }}

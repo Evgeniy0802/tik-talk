@@ -1,5 +1,5 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core'
-import { AsyncPipe }                           from '@angular/common'
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core'
+import { AsyncPipe } from '@angular/common'
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component'
 import { RouterLink, RouterLinkActive } from '@angular/router'
 import {firstValueFrom, Subscription, timer} from 'rxjs'
@@ -22,7 +22,8 @@ import {AuthService} from "@tt/data-access/auth";
 		ClickDirective
 	],
 	templateUrl: './sidebar.component.html',
-	styleUrl: './sidebar.component.scss'
+	styleUrl: './sidebar.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent implements OnInit {
 	profileService = inject(ProfileService)
@@ -41,7 +42,8 @@ export class SidebarComponent implements OnInit {
 	 async reconnect() {
 		console.log('Reconnecting...')
 		await firstValueFrom(this.authService.refreshAuthToken()) //жду рефреша
-		 await firstValueFrom(timer(2000))//ждём когда обновится
+		await new Promise(resolve => setTimeout(resolve, 5000))
+		 //await firstValueFrom(timer(2000))//ждём когда обновится
 		 this.connectWsSide()//конекчу ws
 	}
 

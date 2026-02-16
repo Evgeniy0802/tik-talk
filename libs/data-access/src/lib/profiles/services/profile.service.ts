@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { map, tap } from 'rxjs'
-import {GlobalStoreService, Pageable} from '../../shared';
-import {Profile} from '../../profiles';
+import { GlobalStoreService, Pageable } from '../../shared'
+import { Profile } from '../../profiles'
 
 @Injectable({
 	providedIn: 'root'
@@ -10,7 +10,8 @@ import {Profile} from '../../profiles';
 export class ProfileService {
 	http = inject(HttpClient)
 	#globalStoreService = inject(GlobalStoreService)
-	baseApiUrl = 'https://icherniakov.ru/yt-course/'
+	baseApiUrl = '/yt-course/'
+	//если url начинаеся с /, это относительный url. Он строится относительно домена на котором код запущен
 
 	me = signal<Profile | null>(null)
 	//filteredProfiles = signal<Profile[]>([])
@@ -24,11 +25,13 @@ export class ProfileService {
 	getMe() {
 		return this.http
 			.get<Profile>(`${this.baseApiUrl}account/me`) //возвращаем свой аккаунт, получаем информацию о себе
-			.pipe(tap((res) => {
-				this.me.set(res)
-				this.#globalStoreService.me.set(res)
-				//#нативная переменная в js приватная
-			}))
+			.pipe(
+				tap((res) => {
+					this.me.set(res)
+					this.#globalStoreService.me.set(res)
+					//#нативная переменная в js приватная
+				})
+			)
 	}
 
 	getAccount(id: string) {
@@ -62,8 +65,10 @@ export class ProfileService {
 
 	filterProfiles(params: Record<string, any>) {
 		//Record<string, any> означает объекты типа ключ-значение
-		return this.http
-			.get<Pageable<Profile>>(`${this.baseApiUrl}account/accounts`, { params })
-			//.pipe(tap((res) => this.filteredProfiles.set(res.items)))
+		return this.http.get<Pageable<Profile>>(
+			`${this.baseApiUrl}account/accounts`,
+			{ params }
+		)
+		//.pipe(tap((res) => this.filteredProfiles.set(res.items)))
 	}
 }

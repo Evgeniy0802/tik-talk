@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	HostBinding,
@@ -16,7 +17,8 @@ import {GlobalStoreService} from "@tt/data-access/shared";
 	selector: 'app-post-input',
 	imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
 	templateUrl: './post-input.component.html',
-	styleUrl: './post-input.component.scss'
+	styleUrl: './post-input.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostInputComponent {
 	postService = inject(PostService)

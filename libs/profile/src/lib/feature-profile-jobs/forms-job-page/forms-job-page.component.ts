@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Renderer2 } from '@angular/core'
+import {ChangeDetectionStrategy, Component, ElementRef, inject, Renderer2} from '@angular/core'
 import {
 	AbstractControl,
 	FormArray,
@@ -8,7 +8,7 @@ import {
 	ReactiveFormsModule,
 	ValidatorFn,
 	Validators
-} from '@angular/forms'
+}                                                                           from '@angular/forms'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { KeyValuePipe } from '@angular/common'
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs'
@@ -106,7 +106,8 @@ function getAddressForm(initialValue: Address = {}) {
 		MaskitoDirective
 	],
 	templateUrl: './forms-job-page.component.html',
-	styleUrl: './forms-job-page.component.scss'
+	styleUrl: './forms-job-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormsJobPageComponent {
 	ReceiverType = ReceiverType

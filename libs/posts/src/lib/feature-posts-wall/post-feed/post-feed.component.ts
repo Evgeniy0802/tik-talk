@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	EventEmitter,
@@ -11,15 +12,14 @@ import {
 } from '@angular/core'
 import {
 	debounceTime,
-	firstValueFrom,
 	fromEvent,
 	Subject,
 	takeUntil,
 } from 'rxjs'
 import {PostInputComponent} from "../../ui";
-import {PostComponent}                         from "../post/post.component";
+import {PostComponent}  from "../post/post.component";
 import {postActions, PostService, selectPosts} from "@tt/data-access/posts";
-import {GlobalStoreService}                    from "@tt/data-access/shared";
+import {GlobalStoreService} from "@tt/data-access/shared";
 import {Store} from "@ngrx/store";
 
 
@@ -27,7 +27,8 @@ import {Store} from "@ngrx/store";
 	selector: 'app-post-feed',
 	imports: [PostInputComponent, PostComponent],
 	templateUrl: './post-feed.component.html',
-	styleUrl: './post-feed.component.scss'
+	styleUrl: './post-feed.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostFeedComponent {
 	postService = inject(PostService)

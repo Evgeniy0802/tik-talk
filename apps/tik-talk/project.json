@@ -6,7 +6,8 @@
 		"@schematics/angular:component": {
 			"type": "component",
 			"style": "scss",
-			"skipTests": true
+			"skipTests": true,
+			"changeDetection": "OnPush"
 		},
 		"@schematics/angular:directive": {
 			"type": "directive"
@@ -84,7 +85,10 @@
 					"buildTarget": "tik-talk:build:development"
 				}
 			},
-			"defaultConfiguration": "development"
+			"defaultConfiguration": "development",
+			"options": {
+				"proxyConfig": "proxy-config.json"
+			}
 		},
 		"extract-i18n": {
 			"executor": "@angular/build:extract-i18n"

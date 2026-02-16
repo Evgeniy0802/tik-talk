@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	inject,
@@ -18,7 +19,8 @@ import {ProfileService} from "@tt/data-access/profiles";
 		FormsModule
 	],
 	templateUrl: './message-input.component.html',
-	styleUrl: './message-input.component.scss'
+	styleUrl: './message-input.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent {
 	r2 = inject(Renderer2)

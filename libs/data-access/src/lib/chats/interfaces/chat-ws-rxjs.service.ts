@@ -8,17 +8,21 @@ export class ChatWsRxjsService implements ChatWsService{
     #socket : WebSocketSubject<ChatWsMessage> | null = null;
 
     connect(params: ChatConnectionWsParams): Observable<ChatWsMessage> {
-        if (!this.#socket) {
+       // if (!this.#socket) {
             this.#socket = webSocket({ //на сокет надо подписываться, это просто observable в который мы видим что прилетает
                 url: params.url,
                 protocol: [params.token]
             })
-        }
+        //}
 
         return this.#socket
             .pipe(
                 tap(message => params.handleMessage(message)),
-                finalize(() => console.log('Кино закончилось')) //что делать на конце
+                finalize(() => {
+                    console.log('Кино закончилось')
+                    //this.#socket?.complete(); // Явно завершаем поток
+                    this.#socket = null
+                }) //что делать на конце
             )
     }
 

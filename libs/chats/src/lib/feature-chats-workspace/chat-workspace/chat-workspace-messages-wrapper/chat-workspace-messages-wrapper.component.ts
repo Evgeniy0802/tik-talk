@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	inject,
@@ -15,15 +16,15 @@ import {
 	takeUntil,
 	timer
 } from 'rxjs'
-import { DateTime } from 'luxon'
 import {ChatWorkspaceMessageComponent} from "./chat-workspace-message/chat-workspace-message.component";
-import {Chat, ChatsService, Message} from "@tt/data-access/chats";
+import {Chat, ChatsService} from "@tt/data-access/chats";
 
 @Component({
 	selector: 'app-chat-workspace-messages-wrapper',
 	imports: [ChatWorkspaceMessageComponent, MessageInputComponent],
 	templateUrl: './chat-workspace-messages-wrapper.component.html',
-	styleUrl: './chat-workspace-messages-wrapper.component.scss'
+	styleUrl: './chat-workspace-messages-wrapper.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessagesWrapperComponent {
 	chatsService = inject(ChatsService)

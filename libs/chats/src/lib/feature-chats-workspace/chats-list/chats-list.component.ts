@@ -1,9 +1,9 @@
-import {Component, ElementRef, HostListener, inject, Renderer2} from '@angular/core'
-import { FormControl, ReactiveFormsModule }                     from '@angular/forms'
+import {ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, Renderer2} from '@angular/core'
+import { FormControl, ReactiveFormsModule } from '@angular/forms'
 import { AsyncPipe } from '@angular/common'
-import { RouterLink, RouterLinkActive }                                         from '@angular/router'
+import { RouterLink, RouterLinkActive } from '@angular/router'
 import {debounceTime, fromEvent, map, startWith, Subject, switchMap, takeUntil} from 'rxjs'
-import {SvgIconComponent}                                                       from "@tt/common-ui";
+import {SvgIconComponent} from "@tt/common-ui";
 import {ChatsBtnComponent} from "../chats-btn/chats-btn.component";
 import {ChatsService} from "@tt/data-access/chats";
 
@@ -18,7 +18,8 @@ import {ChatsService} from "@tt/data-access/chats";
 		SvgIconComponent
 	],
 	templateUrl: './chats-list.component.html',
-	styleUrl: './chats-list.component.scss'
+	styleUrl: './chats-list.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatsListComponent {
 	chatsService = inject(ChatsService)
