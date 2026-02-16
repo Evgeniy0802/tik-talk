@@ -36,31 +36,38 @@
 			<app-avatar-upload></app-avatar-upload>
 		</label>
 
-		<label class="tt-form-label">
-			<span class="tt-form-label__text">Навыки (стэк)</span>
-			<input type="text" class="tt-form-input" formControlName="stack" />
-		</label>
+        <span class="tt-form-label__text">Навыки</span>
+
+<!--		<label class="tt-form-label">-->
+<!--			<span class="tt-form-label__text">Навыки (стэк)</span>-->
+<!--			<input type="text" class="tt-form-input" formControlName="stack" />-->
+<!--		</label>-->
+
+        <tt-stack-input
+                formControlName="stack"
+        ></tt-stack-input>
 
 		<label class="tt-form-label btn-go-work">
 			<span class="tt-form-label__text">Место работы</span>
 			<input type="text" class="tt-form-input" formControlName="city" />
-			<button class="btn-work" [routerLink]="['/jobs']">
+			<button type="button" class="btn-work" [routerLink]="['/jobs']">
 				<img class="work-img" src="/assets/imgs/work.png" alt="" />
 			</button>
 		</label>
+
 	</div>
 
 	<div class="three-btn-settings">
 		<div class="two-btn">
-			<button class="btn-icon" (click)="clearForm()">
+			<button type="button" class="btn-icon" (click)="clearForm()">
 				<svg icon="delete" class="svg12"></svg>
 			</button>
-			<button class="btn-icon" [routerLink]="['/login']">
+			<button type="button" class="btn-icon" [routerLink]="['/login']">
 				<svg icon="logout" class="svg12 white"></svg>
 			</button>
 		</div>
 		<div>
-			<button class="btn-save" (click)="onSave()">Сохранить</button>
+			<button type="button"  class="btn-save" (click)="onSave()">Сохранить</button>
 		</div>
 	</div>
 </form>

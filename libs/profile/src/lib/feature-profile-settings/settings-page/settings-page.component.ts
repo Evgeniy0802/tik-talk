@@ -1,16 +1,18 @@
-import {ChangeDetectionStrategy, Component, effect, inject, ViewChild} from '@angular/core'
-import {AvatarUploadComponent, ProfileHeaderComponent}                  from '../../ui'
 import {
-	FormBuilder,
-	ReactiveFormsModule,
-	Validators
-} from '@angular/forms'
+	ChangeDetectionStrategy,
+	Component,
+	effect,
+	inject,
+	ViewChild
+} from '@angular/core'
+import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui'
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { firstValueFrom } from 'rxjs'
 import { ActivatedRoute, RouterLink } from '@angular/router'
 import { AsyncPipe } from '@angular/common'
 import { toObservable } from '@angular/core/rxjs-interop'
-import {SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/data-access/profiles";
+import { StackInputComponent, SvgIconComponent } from '@tt/common-ui'
+import { ProfileService } from '@tt/data-access/profiles'
 
 @Component({
 	selector: 'app-settings-page',
@@ -20,7 +22,8 @@ import {ProfileService} from "@tt/data-access/profiles";
 		AvatarUploadComponent,
 		SvgIconComponent,
 		RouterLink,
-		AsyncPipe
+		AsyncPipe,
+		StackInputComponent
 	],
 	templateUrl: './settings-page.component.html',
 	styleUrl: './settings-page.component.scss',
@@ -53,9 +56,9 @@ export class SettingsPageComponent {
 		effect(() => {
 			//@ts-ignore
 			this.form.patchValue({
-				...this.profileService.me(),
+				...this.profileService.me()
 				//@ts-ignore
-				stack: this.mergeStack(this.profileService.me()?.stack)
+				//stack: this.mergeStack(this.profileService.me()?.stack)
 				//нам придёт массив обязательно или нуль мы его обязательно смержим
 			})
 		})
@@ -87,26 +90,26 @@ export class SettingsPageComponent {
 		firstValueFrom(
 			//@ts-ignore
 			this.profileService.patchProfile({
-				...this.form.value,
-				stack: this.splitStack(this.form.value.stack)
+				...this.form.value
+				//stack: this.splitStack(this.form.value.stack)
 			})
 		)
 	}
 
-	splitStack(stack: string | null | string[] | undefined): string[] {
-		if (!stack) return []
-		if (Array.isArray(stack)) return stack
-		//если это массив тогда возвращаем stack
-
-		return stack.split(',')
-		//split — это «ножницы», которые делают из одной строки удобный список элементов.
-	}
-
-	mergeStack(stack: string | null | string[] | undefined) {
-		if (!stack) return ''
-		if (Array.isArray(stack)) return stack.join(',')
-		// если перед нами список (массив), склеить все его элементы в одну строку через запятую.
-
-		return stack
-	}
+	// splitStack(stack: string | null | string[] | undefined): string[] {
+	// 	if (!stack) return []
+	// 	if (Array.isArray(stack)) return stack
+	// 	//если это массив тогда возвращаем stack
+	//
+	// 	return stack.split(',')
+	// 	//split — это «ножницы», которые делают из одной строки удобный список элементов.
+	// }
+	//
+	// mergeStack(stack: string | null | string[] | undefined) {
+	// 	if (!stack) return ''
+	// 	if (Array.isArray(stack)) return stack.join(',')
+	// 	// если перед нами список (массив), склеить все его элементы в одну строку через запятую.
+	//
+	// 	return stack
+	// }
 }

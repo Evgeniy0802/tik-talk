@@ -1,21 +1,29 @@
 <form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
 	<h1 class="h1 mb60">Вход</h1>
 
-	<label class="tt-control-label mb16">
-		Telegram username
+    <tt-input
+            type="text"
+            placeholder="Введите логин"
+            formControlName="username"
+    >
+        Telegram username
+    </tt-input>
 
-		<div class="telegram-input">
-			<input
-				formControlName="username"
-				class="tt-input"
-				type="text"
-				placeholder="Введите логин" />
+<!--	<label class="tt-control-label mb16">-->
+<!--		Telegram username-->
 
-			<button type="button" class="telegram-btn">
-				<svg icon="telegram" class="tg-svg"></svg>
-			</button>
-		</div>
-	</label>
+<!--		<div class="telegram-input">-->
+<!--			<input-->
+<!--				formControlName="username"-->
+<!--				class="tt-input"-->
+<!--				type="text"-->
+<!--				placeholder="Введите логин" />-->
+
+<!--			<button type="button" class="telegram-btn">-->
+<!--				<svg icon="telegram" class="tg-svg"></svg>-->
+<!--			</button>-->
+<!--		</div>-->
+<!--	</label>-->
 
 	<label class="tt-control-label mb32">
 		Пароль

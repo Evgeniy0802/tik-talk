@@ -38,6 +38,11 @@
 	width: 20px;
 	height: 20px;
 	color: var(--light-transparent-color);
+
+	&:hover,
+	&:focus-visible {
+		color: var(--primary-color);
+	}
 }
 
 .telegram-input {
