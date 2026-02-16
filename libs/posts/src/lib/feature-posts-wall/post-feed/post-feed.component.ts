@@ -10,22 +10,17 @@ import {
 	Output,
 	Renderer2
 } from '@angular/core'
-import {
-	debounceTime,
-	fromEvent,
-	Subject,
-	takeUntil,
-} from 'rxjs'
-import {PostInputComponent} from "../../ui";
-import {PostComponent}  from "../post/post.component";
-import {postActions, PostService, selectPosts} from "@tt/data-access/posts";
-import {GlobalStoreService} from "@tt/data-access/shared";
-import {Store} from "@ngrx/store";
-
+import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs'
+import { PostInputComponent } from '../../ui'
+import { PostComponent } from '../post/post.component'
+import { postActions, PostService, selectPosts } from '@tt/data-access/posts'
+import { GlobalStoreService } from '@tt/data-access/shared'
+import { Store } from '@ngrx/store'
+import { TestDirective } from '../../../../../common-ui/src/lib/directives/test.directive'
 
 @Component({
 	selector: 'app-post-feed',
-	imports: [PostInputComponent, PostComponent],
+	imports: [PostInputComponent, PostComponent, TestDirective],
 	templateUrl: './post-feed.component.html',
 	styleUrl: './post-feed.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -77,13 +72,15 @@ export class PostFeedComponent {
 		if (!postText) return //ориентируемся на пост текст который пришел из инпута
 		//post text это текст поста, работаем с ним в пост инпут, принимаю его функции
 
-		this.store.dispatch(postActions.postsCreate({
-			payload: {
-				title: 'Клёвый пост',
-				content: postText,
-				authorId: this.profile()!.id
-			}
-		}))
+		this.store.dispatch(
+			postActions.postsCreate({
+				payload: {
+					title: 'Клёвый пост',
+					content: postText,
+					authorId: this.profile()!.id
+				}
+			})
+		)
 		// firstValueFrom(
 		// 	this.postService.createPost({
 		// 		title: 'Клёвый пост',
