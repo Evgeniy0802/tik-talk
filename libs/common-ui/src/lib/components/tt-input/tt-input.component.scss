@@ -1,0 +1,7 @@
+.tt-input {
+  &:hover,
+  &:focus-visible {
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+  }
+}

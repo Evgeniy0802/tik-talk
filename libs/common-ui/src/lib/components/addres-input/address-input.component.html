@@ -1,0 +1,32 @@
+<tt-input
+        [formControl]="innerSearchControl"
+        placeholder="Введите адресс"
+        class="inner-cont"
+>
+    <svg icon="search" class="svg16"></svg>
+</tt-input>
+
+@if (suggestions$ | async; as suggestions) {
+    @if (isDropdownOpened()) {
+        <div class="suggestions-dropdown">
+            @for (suggest of suggestions; track suggest) {
+                <button
+                        type="button"
+                        (click)="onSuggestionsPick(suggest)"
+                        class="suggest-btn"
+                >
+                   {{ suggest.data.city_type }}{{ '.' }}{{ suggest.data.city }}
+                   {{ suggest.data.street_type }}{{ '.' }}{{ suggest.data.street }}
+                   {{ suggest.data.house_type }}{{ '.' }}{{ suggest.data.house }}
+                </button>
+            }
+
+        </div>
+    }
+}
+
+<div [formGroup]="addressForm" class="address-block">
+    <tt-input class="city-inp" formControlName="city" placeholder="Введите город">Город</tt-input>
+    <tt-input formControlName="street" placeholder="Введите улицу">Улица</tt-input>
+    <tt-input formControlName="building" placeholder="Введите дом">Дом</tt-input>
+</div>

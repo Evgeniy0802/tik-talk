@@ -19,6 +19,11 @@
   border: none;
   color: var(--light-color);
   cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--primary-color);
+  }
 }
 
 .stack-ghost-input {

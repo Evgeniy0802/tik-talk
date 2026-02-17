@@ -23,7 +23,7 @@
 		</select>
 	</label>
 
-	<div class="adr-sk">
+	<div class="info-sk-personal">
 		<label class="tt-control-label mb16">
 			Имя
 			<input
@@ -117,9 +117,9 @@
 				[maskito]="dateMask" />
 		</label>
 	</div>
-	<!-- @if (form.controls.dateRange.touched && form.controls.dateRange.hasError('dateRange')) {
-    <small>{{ form.controls.dateRange.getError('dateRange')?.message }}</small>
-  }-->
+	 @if (form.controls.dateRange.touched && form.controls.dateRange.hasError('dateRange')) {
+    <small class="err-dateRange">{{ form.controls.dateRange.getError('dateRange')?.message }}</small>
+  }
 
 	<div class="one-h-two-btn">
 		<h4 class="h4 mb16">Адрес склада</h4>
@@ -127,7 +127,7 @@
 			<button class="btn-add-remove" type="button" (click)="addAddress()">
 				+
 			</button>
-			<button class="btn-add-remove" type="button" (click)="deleteAddress(1)">
+			<button class="btn-add-remove" type="button" (click)="deleteAddress()">
 				-
 			</button>
 		</div>
@@ -139,42 +139,15 @@
 		let i = $index
 	) {
 		<div class="adr-sk" [formGroup]="group">
-			<label class="tt-control-label mb16">
-				Область
-				<input
-					class="tt-input"
-					formControlName="region"
-					type="text"
-					placeholder="Введите область" />
-			</label>
 
-			<label class="tt-control-label mb16">
-				Город
-				<input
-					class="tt-input"
-					formControlName="city"
-					type="text"
-					placeholder="Введите город" />
-			</label>
+            <label class="tt-control-label mb16">
+                <input
+                        formControlName="country"
+                        class="tt-input"
+                />
+            </label>
 
-			<label class="tt-control-label mb16">
-				Улица
-				<input
-					class="tt-input"
-					formControlName="street"
-					type="text"
-					placeholder="Введите улицу" />
-			</label>
-
-			<label class="tt-control-label mb16">
-				Дом
-				<input
-					class="tt-input"
-					formControlName="building"
-					type="text"
-					placeholder="Введите дом"
-					onlyNumber />
-			</label>
+			<tt-address-input formControlName="city"></tt-address-input>
 		</div>
 
 		<div [formGroup]="form.controls.feature">

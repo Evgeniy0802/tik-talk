@@ -1,7 +1,9 @@
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
 	forwardRef,
+	inject,
 	input,
 	signal
 } from '@angular/core'
@@ -30,6 +32,8 @@ export class TtInputComponent implements ControlValueAccessor {
 	type = input<'text' | 'password'>('text')
 	placeholder = input<string>()
 
+	cdr = inject(ChangeDetectorRef)
+
 	disabled = signal<boolean>(false)
 
 	onChange: any
@@ -38,6 +42,7 @@ export class TtInputComponent implements ControlValueAccessor {
 	value: string | null = null
 
 	writeValue(val: string | null) {
+		this.cdr.markForCheck()
 		console.log(val)
 		this.value = val //двухсторон связ. Вызывал функ со знач которое ему прилитело. Нужно заставить наш контрол получить это знач
 	}
@@ -56,6 +61,7 @@ export class TtInputComponent implements ControlValueAccessor {
 	}
 
 	onModelChange(val: string | null): void {
-		//this.onChange(val) //двухсторонее связывание, меняется значение
+		this.onChange(val) //двухсторонее связывание, меняется значение
+		this.cdr.markForCheck()
 	}
 }

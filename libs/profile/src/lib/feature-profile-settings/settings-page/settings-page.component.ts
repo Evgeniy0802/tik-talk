@@ -11,7 +11,11 @@ import { firstValueFrom } from 'rxjs'
 import { ActivatedRoute, RouterLink } from '@angular/router'
 import { AsyncPipe } from '@angular/common'
 import { toObservable } from '@angular/core/rxjs-interop'
-import { StackInputComponent, SvgIconComponent } from '@tt/common-ui'
+import {
+	AddressInputComponent,
+	StackInputComponent,
+	SvgIconComponent
+} from '@tt/common-ui'
 import { ProfileService } from '@tt/data-access/profiles'
 
 @Component({
@@ -23,7 +27,8 @@ import { ProfileService } from '@tt/data-access/profiles'
 		SvgIconComponent,
 		RouterLink,
 		AsyncPipe,
-		StackInputComponent
+		StackInputComponent,
+		AddressInputComponent
 	],
 	templateUrl: './settings-page.component.html',
 	styleUrl: './settings-page.component.scss',
@@ -49,7 +54,8 @@ export class SettingsPageComponent {
 		username: [{ value: '', disabled: true }, Validators.required],
 		description: [''],
 		stack: [''],
-		city: ['']
+		city: [''],
+		jobs: ['Сотрудник склада Вб']
 	})
 
 	constructor() {

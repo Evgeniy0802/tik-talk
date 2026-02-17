@@ -10,6 +10,10 @@
 	display: none;
 }
 
+.mb16 {
+	margin-top: 16px;
+}
+
 .form-wb {
 	width: 600px;
 }
@@ -18,9 +22,16 @@
 	text-align: center;
 }
 
-.adr-sk {
+.info-sk-personal {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+	margin-top: 40px;
+}
+
+.adr-sk {
+	display: grid;
+	grid-template-columns: 1fr;
 	grid-gap: 10px;
 	margin-top: 40px;
 }
@@ -30,6 +41,7 @@
 	-webkit-appearance: none;
 	margin: 0;
 }
+
 
 .tt-input {
 	&:hover,
@@ -117,4 +129,8 @@
 .tt-input::-webkit-calendar-picker-indicator {
 	background-color: var(--primary-color);
 	cursor: pointer;
+}
+
+.err-dateRange {
+	color: var(--red-color);
 }

@@ -4,6 +4,7 @@
 	}
 </div>
 
+
 <form class="profile-form__wrapper" [formGroup]="form">
 	<div class="profile-form">
 		<div class="two-columns">
@@ -36,6 +37,10 @@
 			<app-avatar-upload></app-avatar-upload>
 		</label>
 
+        <span class="tt-form-label__text">Адресс</span>
+
+        <tt-address-input formControlName="city"></tt-address-input>
+
         <span class="tt-form-label__text">Навыки</span>
 
 <!--		<label class="tt-form-label">-->
@@ -47,13 +52,14 @@
                 formControlName="stack"
         ></tt-stack-input>
 
-		<label class="tt-form-label btn-go-work">
-			<span class="tt-form-label__text">Место работы</span>
-			<input type="text" class="tt-form-input" formControlName="city" />
-			<button type="button" class="btn-work" [routerLink]="['/jobs']">
-				<img class="work-img" src="/assets/imgs/work.png" alt="" />
-			</button>
-		</label>
+        <label class="tt-form-label btn-go-work">
+            <span class="tt-form-label__text">Место работы</span>
+            <input type="text" class="tt-form-input" formControlName="jobs"/>
+            <button type="button" class="btn-work" [routerLink]="['/jobs']">
+                <img class="work-img" src="/assets/imgs/work.png" alt="" />
+            </button>
+        </label>
+
 
 	</div>
 

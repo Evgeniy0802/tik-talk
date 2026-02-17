@@ -1,4 +1,10 @@
-import {ChangeDetectionStrategy, Component, ElementRef, inject, Renderer2} from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	inject,
+	Renderer2
+} from '@angular/core'
 import {
 	AbstractControl,
 	FormArray,
@@ -8,15 +14,16 @@ import {
 	ReactiveFormsModule,
 	ValidatorFn,
 	Validators
-}                                                                           from '@angular/forms'
+} from '@angular/forms'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { KeyValuePipe } from '@angular/common'
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs'
 import { MaskitoDirective } from '@maskito/angular'
 import { NameValidator } from './name.validator'
 import { MaskitoOptions } from '@maskito/core'
-import {OnlyNumberDirective} from "@tt/common-ui";
-import {Feature, JobsService, OperationOption} from "@tt/data-access/jobs";
+import { AddressInputComponent, OnlyNumberDirective } from '@tt/common-ui'
+import { Feature, JobsService, OperationOption } from '@tt/data-access/jobs'
+import { readonly } from '@angular/forms/signals'
 
 function validateStartWith(forbiddenLetter: string): ValidatorFn {
 	return (control: AbstractControl) => {
@@ -82,6 +89,7 @@ enum Operation {
 }
 
 interface Address {
+	country?: string
 	region?: string
 	city?: string
 	street?: string
@@ -90,10 +98,11 @@ interface Address {
 
 function getAddressForm(initialValue: Address = {}) {
 	return new FormGroup({
-		region: new FormControl<string>(initialValue.region ?? ''),
-		city: new FormControl<string>(initialValue.city ?? ''),
-		street: new FormControl<string>(initialValue.street ?? ''),
-		building: new FormControl<number | null>(initialValue.building ?? null)
+		country: new FormControl<string>(
+			{ value: initialValue.country ?? 'Россия', disabled: true }
+			//Validators.required
+		),
+		city: new FormControl<string>(initialValue.city ?? '')
 	})
 }
 
@@ -103,7 +112,8 @@ function getAddressForm(initialValue: Address = {}) {
 		ReactiveFormsModule,
 		KeyValuePipe,
 		OnlyNumberDirective,
-		MaskitoDirective
+		MaskitoDirective,
+		AddressInputComponent
 	],
 	templateUrl: './forms-job-page.component.html',
 	styleUrl: './forms-job-page.component.scss',
@@ -116,7 +126,6 @@ export class FormsJobPageComponent {
 	hostElement = inject(ElementRef)
 	r2 = inject(Renderer2)
 	private destroy$ = new Subject()
-	nameValidator = inject(NameValidator)
 	operations: OperationOption[] = [
 		{
 			value: Operation.acceptance,
@@ -164,8 +173,8 @@ export class FormsJobPageComponent {
 
 	form = new FormGroup({
 		organization: new FormControl(
-			this.initialValue.organization,
-			Validators.required
+			this.initialValue.organization
+			//Validators.required
 		),
 		type: new FormControl(this.initialValue.type, Validators.required),
 		name: new FormControl(
@@ -175,16 +184,21 @@ export class FormsJobPageComponent {
 		),
 		lastName: new FormControl(this.initialValue.lastName, Validators.required),
 		operation: new FormControl(
-			this.initialValue.operation,
-			Validators.required
+			this.initialValue.operation
+			//Validators.required
 		),
 		areaResponsibility: new FormControl(
-			this.initialValue.areaResponsibility,
-			Validators.required
+			this.initialValue.areaResponsibility
+			//Validators.required
 		),
-		id: new FormControl(this.initialValue.id, Validators.required),
+		id: new FormControl(this.initialValue.id, [
+			Validators.required,
+			Validators.maxLength(7)
+		]),
 		telephone: new FormControl(this.initialValue.telephone, [
-			Validators.required
+			Validators.required,
+			Validators.minLength(18),
+			Validators.maxLength(18)
 			//Validators.pattern(/^(\+7|8)\d{10}$/)
 		]),
 		snils: new FormControl(this.initialValue.snils, [
@@ -196,8 +210,16 @@ export class FormsJobPageComponent {
 		feature: new FormRecord({}),
 		dateRange: new FormGroup(
 			{
-				from: new FormControl<string>(''),
-				to: new FormControl<string>('')
+				from: new FormControl<string>('', [
+					Validators.required,
+					Validators.minLength(10),
+					Validators.maxLength(10)
+				]),
+				to: new FormControl<string>('', [
+					Validators.required,
+					Validators.minLength(10),
+					Validators.maxLength(10)
+				])
 			},
 			validateDateRange({
 				fromControlName: 'from',
@@ -295,12 +317,17 @@ export class FormsJobPageComponent {
 		//еще один метод
 		const newAddressForm = getAddressForm()
 		this.form.controls.addresses.insert(0, newAddressForm)
+		//this.form.controls.addresses.push(new FormControl(''))
 	}
 
-	deleteAddress(index: number) {
-		this.form.controls.addresses.removeAt(index, {
-			emitEvent: false
-		})
+	deleteAddress() {
+		// this.form.controls.addresses.removeAt(index, {
+		// 	emitEvent: false
+		// })
+		const addrSk = this.form.controls.addresses
+		if (addrSk.length > 0) {
+			addrSk.removeAt(addrSk.length - 1)
+		}
 	}
 
 	readonly dateMask: MaskitoOptions = {
