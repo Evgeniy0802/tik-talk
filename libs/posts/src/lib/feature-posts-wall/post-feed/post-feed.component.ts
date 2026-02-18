@@ -20,6 +20,7 @@ import { TestDirective } from '../../../../../common-ui/src/lib/directives/test.
 
 @Component({
 	selector: 'app-post-feed',
+	standalone: true,
 	imports: [PostInputComponent, PostComponent, TestDirective],
 	templateUrl: './post-feed.component.html',
 	styleUrl: './post-feed.component.scss',

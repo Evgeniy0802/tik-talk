@@ -11,8 +11,7 @@ import {
 	FormControl,
 	FormGroup,
 	NG_VALUE_ACCESSOR,
-	ReactiveFormsModule,
-	Validators
+	ReactiveFormsModule
 } from '@angular/forms'
 import { SvgIconComponent, TtInputComponent } from '@tt/common-ui'
 import { DadataService } from '@tt/data-access/shared'
@@ -23,6 +22,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
 	selector: 'tt-address-input',
+	standalone: true,
 	imports: [TtInputComponent, ReactiveFormsModule, AsyncPipe, SvgIconComponent],
 	templateUrl: './address-input.component.html',
 	styleUrl: './address-input.component.scss',

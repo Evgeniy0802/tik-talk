@@ -1,16 +1,18 @@
-import {ChangeDetectionStrategy, Component, inject, OnDestroy} from '@angular/core'
 import {
-	FormBuilder,
-	FormsModule,
-	ReactiveFormsModule,
-} from '@angular/forms'
-import { debounceTime, startWith, Subscription} from 'rxjs'
-import {SvgIconComponent} from "@tt/common-ui";
-import {profileActions, ProfileService} from "@tt/data-access/profiles";
-import {Store} from "@ngrx/store";
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	OnDestroy
+} from '@angular/core'
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { debounceTime, startWith, Subscription } from 'rxjs'
+import { SvgIconComponent } from '@tt/common-ui'
+import { profileActions, ProfileService } from '@tt/data-access/profiles'
+import { Store } from '@ngrx/store'
 
 @Component({
 	selector: 'app-profile-filters',
+	standalone: true,
 	imports: [FormsModule, ReactiveFormsModule, SvgIconComponent],
 	templateUrl: './profile-filters.component.html',
 	styleUrl: './profile-filters.component.scss',
@@ -35,13 +37,13 @@ export class ProfileFiltersComponent implements OnDestroy {
 		this.searchFormSub = this.searchForm.valueChanges
 			.pipe(
 				startWith({}),
-				debounceTime(300),
+				debounceTime(300)
 				//takeUntilDestroyed()
 				//takeUntil(this.destroy$)
 				//takeUntil() значит что мы будем исполнять и применять эту подписку до тех пор пока не закончится стрим который мы укажем в takeUntil
 			)
-			.subscribe(formValue => {
-				this.store.dispatch(profileActions.filterEvents({filters: formValue}))
+			.subscribe((formValue) => {
+				this.store.dispatch(profileActions.filterEvents({ filters: formValue }))
 			})
 	}
 

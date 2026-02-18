@@ -16,11 +16,12 @@ import {
 	takeUntil,
 	timer
 } from 'rxjs'
-import {ChatWorkspaceMessageComponent} from "./chat-workspace-message/chat-workspace-message.component";
-import {Chat, ChatsService} from "@tt/data-access/chats";
+import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component'
+import { Chat, ChatsService } from '@tt/data-access/chats'
 
 @Component({
 	selector: 'app-chat-workspace-messages-wrapper',
+	standalone: true,
 	imports: [ChatWorkspaceMessageComponent, MessageInputComponent],
 	templateUrl: './chat-workspace-messages-wrapper.component.html',
 	styleUrl: './chat-workspace-messages-wrapper.component.scss',
@@ -37,10 +38,7 @@ export class ChatWorkspaceMessagesWrapperComponent {
 	messages = this.chatsService.groupedActiveChatMessages
 
 	async onSendMessage(messageText: string) {
-		this.chatsService.wsAdapter.sendMessage(
-			messageText,
-			this.chat().id
-		)
+		this.chatsService.wsAdapter.sendMessage(messageText, this.chat().id)
 		// await firstValueFrom(
 		// 	this.chatsService.sendMessage(this.chat().id, messageText)
 		// )

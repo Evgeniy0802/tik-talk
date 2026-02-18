@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component, signal} from '@angular/core'
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import {DndDirective, SvgIconComponent} from "@tt/common-ui";
+import { DndDirective, SvgIconComponent } from '@tt/common-ui'
 
 @Component({
 	selector: 'app-avatar-upload',
+	standalone: true,
 	imports: [SvgIconComponent, DndDirective, FormsModule],
 	templateUrl: './avatar-upload.component.html',
 	styleUrl: './avatar-upload.component.scss',

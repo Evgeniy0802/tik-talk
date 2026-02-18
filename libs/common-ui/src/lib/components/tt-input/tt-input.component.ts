@@ -16,6 +16,7 @@ import {
 
 @Component({
 	selector: 'tt-input',
+	standalone: true,
 	imports: [ReactiveFormsModule, FormsModule],
 	templateUrl: './tt-input.component.html',
 	styleUrl: './tt-input.component.scss',

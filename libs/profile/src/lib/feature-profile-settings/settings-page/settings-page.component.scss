@@ -106,3 +106,23 @@
 	background-color: var(--primary-color);
 	border-radius: 4px;
 }
+
+.left-column {
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.bold-size {
+	font-weight: 900;
+	font-size: 32px;
+}
+
+.hover-focus-span {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 10px;
+	&:hover,
+	&:focus-visible {
+		color: var(--primary-color);
+	}
+}

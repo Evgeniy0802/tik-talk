@@ -7,7 +7,8 @@ import {
 } from '@angular/core'
 
 @Directive({
-	selector: '[dnd]'
+	selector: '[dnd]',
+	standalone: true
 })
 export class DndDirective {
 	@Output() fileDropped = new EventEmitter<File>()

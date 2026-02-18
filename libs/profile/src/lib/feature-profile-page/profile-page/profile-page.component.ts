@@ -1,15 +1,21 @@
-import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core'
-import { ProfileHeaderComponent }  from '../../ui'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	signal
+} from '@angular/core'
+import { ProfileHeaderComponent } from '../../ui'
 import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 import { switchMap } from 'rxjs'
 import { toObservable } from '@angular/core/rxjs-interop'
 import { AsyncPipe } from '@angular/common'
-import {ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
-import {PostFeedComponent} from "@tt/posts";
-import {ProfileService} from "@tt/data-access/profiles";
+import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
+import { PostFeedComponent } from '@tt/posts'
+import { ProfileService } from '@tt/data-access/profiles'
 
 @Component({
 	selector: 'app-profile-page',
+	standalone: true,
 	imports: [
 		ProfileHeaderComponent,
 		AsyncPipe,
@@ -49,7 +55,7 @@ export class ProfilePageComponent {
 		)
 
 	async sendMessage(userId: number) {
-			//после того как чат создаться, запрос ответит перенаправляем на чат с этим человеком айдишника
-		this.router.navigate(['/chats', 'new'], {queryParams: {userId}})
+		//после того как чат создаться, запрос ответит перенаправляем на чат с этим человеком айдишника
+		this.router.navigate(['/chats', 'new'], { queryParams: { userId } })
 	}
 }

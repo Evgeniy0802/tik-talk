@@ -9,12 +9,13 @@ import {
 	Renderer2
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui"
-import {PostService} from "@tt/data-access/posts";
-import {GlobalStoreService} from "@tt/data-access/shared";
+import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui'
+import { PostService } from '@tt/data-access/posts'
+import { GlobalStoreService } from '@tt/data-access/shared'
 
 @Component({
 	selector: 'app-post-input',
+	standalone: true,
 	imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
 	templateUrl: './post-input.component.html',
 	styleUrl: './post-input.component.scss',

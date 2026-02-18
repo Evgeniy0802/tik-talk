@@ -17,6 +17,7 @@ import { AsyncPipe } from '@angular/common'
 
 @Component({
 	selector: 'tt-stack-input',
+	standalone: true,
 	imports: [SvgIconComponent, FormsModule, AsyncPipe],
 	templateUrl: './stack-input.component.html',
 	styleUrl: './stack-input.component.scss',

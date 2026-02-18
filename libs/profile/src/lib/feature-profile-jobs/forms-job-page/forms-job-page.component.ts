@@ -108,6 +108,7 @@ function getAddressForm(initialValue: Address = {}) {
 
 @Component({
 	selector: 'app-forms-job',
+	standalone: true,
 	imports: [
 		ReactiveFormsModule,
 		KeyValuePipe,

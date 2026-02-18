@@ -21,6 +21,7 @@ import { firstValueFrom, scan, Subject } from 'rxjs'
 
 @Component({
 	selector: 'app-search-page',
+	standalone: true,
 	imports: [
 		ProfileCardComponent,
 		ProfileFiltersComponent,

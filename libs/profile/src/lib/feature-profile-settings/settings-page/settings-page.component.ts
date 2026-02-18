@@ -20,6 +20,7 @@ import { ProfileService } from '@tt/data-access/profiles'
 
 @Component({
 	selector: 'app-settings-page',
+	standalone: true,
 	imports: [
 		ProfileHeaderComponent,
 		ReactiveFormsModule,

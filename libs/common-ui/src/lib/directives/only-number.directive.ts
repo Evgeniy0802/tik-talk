@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostListener } from '@angular/core'
 
 @Directive({
-	selector: '[onlyNumber]'
+	selector: '[onlyNumber]',
+	standalone: true
 })
 export class OnlyNumberDirective {
 	constructor(private el: ElementRef) {}

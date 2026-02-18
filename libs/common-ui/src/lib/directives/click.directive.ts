@@ -8,7 +8,8 @@ import {
 } from '@angular/core'
 
 @Directive({
-	selector: '[clickDnd]'
+	selector: '[clickDnd]',
+	standalone: true
 })
 export class ClickDirective {
 	// Output-свойство, которое будет отправлять булево значение.
