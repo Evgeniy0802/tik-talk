@@ -25,6 +25,7 @@ import { Store } from '@ngrx/store'
 
 @Component({
 	selector: 'app-post',
+	standalone: true,
 	imports: [
 		AvatarCircleComponent,
 		SvgIconComponent,

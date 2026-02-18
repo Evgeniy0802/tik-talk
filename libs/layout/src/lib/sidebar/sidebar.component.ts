@@ -1,17 +1,24 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit} from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	DestroyRef,
+	inject,
+	OnInit
+} from '@angular/core'
 import { AsyncPipe } from '@angular/common'
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component'
 import { RouterLink, RouterLinkActive } from '@angular/router'
-import {firstValueFrom, Subscription, timer} from 'rxjs'
-import {ClickDirective, ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/data-access/profiles";
-import {ChatsService} from "@tt/data-access/chats";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
-import {isErrMessage} from "@tt/data-access/chats/interfaces/type-guards";
-import {AuthService} from "@tt/data-access/auth";
+import { firstValueFrom, Subscription, timer } from 'rxjs'
+import { ClickDirective, ImgUrlPipe, SvgIconComponent } from '@tt/common-ui'
+import { ProfileService } from '@tt/data-access/profiles'
+import { ChatsService } from '@tt/data-access/chats'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { isErrMessage } from '@tt/data-access/chats/interfaces/type-guards'
+import { AuthService } from '@tt/data-access/auth'
 
 @Component({
 	selector: 'app-sidebar',
+	standalone: true,
 	imports: [
 		SvgIconComponent,
 		SubscriberCardComponent,
@@ -39,12 +46,12 @@ export class SidebarComponent implements OnInit {
 	fileLogout: boolean = false
 	photoSide: boolean = false
 
-	 async reconnect() {
+	async reconnect() {
 		console.log('Reconnecting...')
 		await firstValueFrom(this.authService.refreshAuthToken()) //жду рефреша
-		await new Promise(resolve => setTimeout(resolve, 5000))
-		 //await firstValueFrom(timer(2000))//ждём когда обновится
-		 this.connectWsSide()//конекчу ws
+		await new Promise((resolve) => setTimeout(resolve, 5000))
+		//await firstValueFrom(timer(2000))//ждём когда обновится
+		this.connectWsSide() //конекчу ws
 	}
 
 	connectWsSide(): void {

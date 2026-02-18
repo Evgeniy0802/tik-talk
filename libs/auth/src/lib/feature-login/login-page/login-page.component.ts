@@ -1,4 +1,9 @@
- import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	signal
+} from '@angular/core'
 import {
 	FormControl,
 	FormGroup,
@@ -6,12 +11,13 @@ import {
 	Validators
 } from '@angular/forms'
 import { Router } from '@angular/router'
-import {SvgIconComponent} from "@tt/common-ui";
- import {AuthService} from "@tt/data-access/auth";
+import { SvgIconComponent, TtInputComponent } from '@tt/common-ui'
+import { AuthService } from '@tt/data-access/auth'
 
 @Component({
 	selector: 'app-login-page',
-	imports: [ReactiveFormsModule, SvgIconComponent],
+	standalone: true,
+	imports: [ReactiveFormsModule, SvgIconComponent, TtInputComponent],
 	templateUrl: './login-page.component.html',
 	styleUrl: './login-page.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,6 +32,13 @@ export class LoginPageComponent {
 		username: new FormControl(null, Validators.required),
 		password: new FormControl(null, Validators.required)
 	})
+
+	// ngOnInit() {
+	// 	this.form.valueChanges.subscribe((val) => {
+	// 		console.log(val)
+	// 	})
+	// 	this.form.controls.username.disable()
+	// }
 
 	onSubmit(event: Event) {
 		console.log(this.form.value)

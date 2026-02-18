@@ -7,11 +7,12 @@ import {
 	Renderer2
 } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/data-access/profiles";
+import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui'
+import { ProfileService } from '@tt/data-access/profiles'
 
 @Component({
 	selector: 'app-message-input',
+	standalone: true,
 	imports: [
 		AvatarCircleComponent,
 		ReactiveFormsModule,

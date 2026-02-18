@@ -10,6 +10,7 @@ import { DateTime } from 'luxon'
 
 @Component({
 	selector: 'app-chat-workspace-message',
+	standalone: true,
 	imports: [AvatarCircleComponent],
 	templateUrl: './chat-workspace-message.component.html',
 	styleUrl: './chat-workspace-message.component.scss',

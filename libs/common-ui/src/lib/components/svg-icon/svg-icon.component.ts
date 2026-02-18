@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core'
 
 @Component({
 	selector: 'svg[icon]',
+	standalone: true,
 	//все svg у который будет указываться атрибут icon, станут этим компонентом
 	imports: [],
 	template: '<svg:use [attr.href]="href"></svg:use>',

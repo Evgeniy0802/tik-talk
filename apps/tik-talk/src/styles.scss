@@ -10,6 +10,7 @@
 	--dark-hover-color: #161616;
 	--light-transparent-form-color: rgba(255, 255, 255, 0.75);
 	--message-color: #404040;
+	--red-color: #d9534f;
 
 	--light-border: 1px solid var(--light-color);
 }
@@ -103,6 +104,11 @@ body {
 .svg12 {
 	width: 12px;
 	height: 12px;
+}
+
+.svg10 {
+	width: 10px;
+	height: 10px;
 }
 
 .btn-shadow {

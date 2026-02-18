@@ -1,66 +1,86 @@
 <div>
-	@if (profile$ | async; as profile) {
-		<app-profile-header [profile]="profile"></app-profile-header>
-	}
+    <div class="left-column">
+        @if (profile$ | async; as profile) {
+            <app-profile-header [profile]="profile"></app-profile-header>
+        }
+
+        <div class="hover-focus-span mt20">
+            <span class="bold-size">Самый худший ученик.</span>
+            <span class="bold-size">Стараемся!!!</span>
+        </div>
+    </div>
 </div>
 
+
 <form class="profile-form__wrapper" [formGroup]="form">
-	<div class="profile-form">
-		<div class="two-columns">
-			<label class="tt-form-label">
-				<span class="tt-form-label__text">Имя</span>
-				<input type="text" class="tt-form-input" formControlName="firstName" />
-			</label>
+    <div class="profile-form">
+        <div class="two-columns">
+            <label class="tt-form-label">
+                <span class="tt-form-label__text">Имя</span>
+                <input type="text" class="tt-form-input" formControlName="firstName"/>
+            </label>
 
-			<label class="tt-form-label">
-				<span class="tt-form-label__text">Фамилия</span>
-				<input type="text" class="tt-form-input" formControlName="lastName" />
-			</label>
-		</div>
+            <label class="tt-form-label">
+                <span class="tt-form-label__text">Фамилия</span>
+                <input type="text" class="tt-form-input" formControlName="lastName"/>
+            </label>
+        </div>
 
-		<label class="tt-form-label">
-			<span class="tt-form-label__text">Telegram username</span>
-			<input type="text" class="tt-form-input" formControlName="username" />
-		</label>
+        <label class="tt-form-label">
+            <span class="tt-form-label__text">Telegram username</span>
+            <input type="text" class="tt-form-input" formControlName="username"/>
+        </label>
 
-		<label class="tt-form-label">
-			<span class="tt-form-label__text">О себе</span>
-			<textarea
-				class="tt-form-input tt-textarea"
-				rows="4"
-				formControlName="description"></textarea>
-		</label>
+        <label class="tt-form-label">
+            <span class="tt-form-label__text">О себе</span>
+            <textarea
+                    class="tt-form-input tt-textarea"
+                    rows="4"
+                    formControlName="description"></textarea>
+        </label>
 
-		<label class="tt-form-label">
-			<span class="tt-form-label__text">Аватар</span>
-			<app-avatar-upload></app-avatar-upload>
-		</label>
+        <label class="tt-form-label">
+            <span class="tt-form-label__text">Аватар</span>
+            <app-avatar-upload></app-avatar-upload>
+        </label>
 
-		<label class="tt-form-label">
-			<span class="tt-form-label__text">Навыки (стэк)</span>
-			<input type="text" class="tt-form-input" formControlName="stack" />
-		</label>
+        <span class="tt-form-label__text">Адресс</span>
 
-		<label class="tt-form-label btn-go-work">
-			<span class="tt-form-label__text">Место работы</span>
-			<input type="text" class="tt-form-input" formControlName="city" />
-			<button class="btn-work" [routerLink]="['/jobs']">
-				<img class="work-img" src="/assets/imgs/work.png" alt="" />
-			</button>
-		</label>
-	</div>
+        <tt-address-input formControlName="city"></tt-address-input>
 
-	<div class="three-btn-settings">
-		<div class="two-btn">
-			<button class="btn-icon" (click)="clearForm()">
-				<svg icon="delete" class="svg12"></svg>
-			</button>
-			<button class="btn-icon" [routerLink]="['/login']">
-				<svg icon="logout" class="svg12 white"></svg>
-			</button>
-		</div>
-		<div>
-			<button class="btn-save" (click)="onSave()">Сохранить</button>
-		</div>
-	</div>
+        <span class="tt-form-label__text">Навыки</span>
+
+        <!--		<label class="tt-form-label">-->
+        <!--			<span class="tt-form-label__text">Навыки (стэк)</span>-->
+        <!--			<input type="text" class="tt-form-input" formControlName="stack" />-->
+        <!--		</label>-->
+
+        <tt-stack-input
+                formControlName="stack"
+        ></tt-stack-input>
+
+        <label class="tt-form-label btn-go-work">
+            <span class="tt-form-label__text">Место работы</span>
+            <input type="text" class="tt-form-input" formControlName="jobs"/>
+            <button type="button" class="btn-work" [routerLink]="['/jobs']">
+                <img class="work-img" src="/assets/imgs/work.png" alt=""/>
+            </button>
+        </label>
+
+
+    </div>
+
+    <div class="three-btn-settings">
+        <div class="two-btn">
+            <button type="button" class="btn-icon" (click)="clearForm()">
+                <svg icon="delete" class="svg12"></svg>
+            </button>
+            <button type="button" class="btn-icon" [routerLink]="['/login']">
+                <svg icon="logout" class="svg12 white"></svg>
+            </button>
+        </div>
+        <div>
+            <button type="button" class="btn-save" (click)="onSave()">Сохранить</button>
+        </div>
+    </div>
 </form>
